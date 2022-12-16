@@ -1,0 +1,6 @@
+.make-log
+.make-log.txt
+.changed-files
+node_modules
+build
+dist

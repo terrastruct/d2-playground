@@ -1,0 +1,92 @@
+#modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 7;
+  background: rgba(60, 62, 68, 0.45);
+}
+
+#modal-container {
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 40rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  max-height: calc(100% - 4.4rem);
+  overflow: visible;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Modal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#modal-header {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--steel-100);
+  padding: 1.4rem;
+  border-bottom: 1px solid var(--steel-200);
+  position: relative;
+  font-family: "Source Sans Pro Medium";
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+#modal-content {
+  min-height: 10rem;
+  padding: 1.4rem;
+  min-height: 5rem;
+  overflow-y: auto;
+}
+
+#modal-close {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.8rem;
+  z-index: 2;
+  cursor: pointer;
+}
+
+#modal-close-cion {
+  width: 1rem;
+  height: 1rem;
+}
+
+#modal-footer {
+  height: 4rem;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0px 0px 10px 10px;
+  padding: 0 1.4rem;
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+#modal-footer-options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+
+.modal-footer-option {
+  width: 100%;
+  font-family: "Source Sans Pro Medium";
+}

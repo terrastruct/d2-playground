@@ -1,0 +1,57 @@
+#header {
+  width: calc(100% - 40px);
+  height: 60px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+#header-border-bottom {
+  position: absolute;
+  height: 4px;
+  left: 0px;
+  right: 0px;
+  top: 56px;
+  background: linear-gradient(89.97deg, #FDD4BA 0.02%, #F5B7C5 15.12%, #ADA9EF 33.86%, #73B6FC 51.04%, #66B1FC 63.01%, #4F74F4 82.27%, #2E30EE 99.98%);
+}
+#header-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Source Code Pro';
+}
+.d2-logo-img {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+.logo-d2-label {
+  font-family: "Source Sans Pro Bold";
+  color: var(--steel-900);
+  padding-right: 8px;
+}
+#header-playground-label {
+  color: var(--steel-800);
+}
+
+#nav-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 40px;
+  gap: 24px;
+}
+
+.nav-menu-item {
+  color: var(--steel-800);
+  outline: none;
+  text-decoration: none;
+  font-family: 'Source Sans Pro';
+}
+
+.nav-menu-item:hover {
+  text-decoration: underline;
+}

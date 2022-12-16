@@ -1,0 +1,121 @@
+#code-snippets-container {
+  column-gap: 24px;
+  visibility: hidden;
+}
+
+#code-snippets-header {
+  font-family: "Source Sans Pro Medium";
+  font-size: 24px;
+  margin: 32px 0;
+}
+
+.code-snippet-card {
+  width: 282px;
+  display: inline-block;
+  border-radius: 6px;
+  padding: 16px var(--code-snippet-card-padding) var(--code-snippet-card-padding) var(--code-snippet-card-padding);
+  border: 1px solid var(--steel-200);
+  background-color: var(--steel-000);
+  margin-bottom: 24px;
+}
+
+.code-snippet-card-title {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-family: 'Source Sans Pro';
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.preview-icon {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.preview-icon:hover {
+  background-color: var(--steel-100);
+}
+
+.code-snippet-card-content {
+  border-radius: 4px;
+  background-color: var(--steel-050);
+  position: relative;
+}
+
+.code-snippet-code {
+  overflow-x: auto;
+  background-color: #F8F8FB;
+  white-space: pre-wrap;
+  padding: 12px;
+  font-size: 12px;
+  font-family: 'Source Code Pro';
+}
+
+.code-snippet-card-content:hover > .code-snippet-card-clipboard-button {
+  visibility: visible;
+}
+
+.code-snippet-card-clipboard-button {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--blue-300);
+  border-radius: var(--border-radius);
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background-color: var(--steel-000);
+  box-shadow: 1px 1px 8px 0px #1F243A1A;
+  cursor: pointer;
+}
+
+.code-snippet-card-clipboard-button:hover {
+  background-color: var(--steel-100);
+}
+
+.code-snippet-card-clipboard-button:hover > .clipboard-tooltip {
+  visibility:visible;
+}
+
+.code-snippet-card-clipboard-button:hover > .arrow {
+  visibility:visible;
+}
+
+.clipboard-tooltip {
+  position: absolute;
+  top: -41px;
+  white-space: nowrap;
+  background: var(--steel-900);
+  border-radius: 2px;
+  padding: 6px 8px 6px 8px;
+  visibility:hidden;
+}
+
+.clipboard-tooltip > span {
+  color: var(--steel-000);
+  font-size: 12px;
+  text-align: center;
+}
+
+.arrow {
+  visibility:hidden;
+  position:absolute;
+  margin: -45px 0 0 0px;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid var(--steel-900);
+}

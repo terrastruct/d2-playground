@@ -1,0 +1,95 @@
+@import "./notification.css";
+@import "./modal.css";
+@import "./range.css";
+@import "./button.css";
+
+@import "./header.css";
+@import "./hero.css";
+@import "./workstation.css";
+@import "./monaco.css";
+@import "./snippets.css";
+@import "./footer.css";
+
+@import "./responsive.css";
+
+:root {
+  --shadow-md: 1px 1px 8px rgba(31, 36, 58, 0.1);
+  --shadow-lg: 0px 0px 16px rgba(31, 36, 58, 0.1);
+
+  --steel-000: #FFFFFF;
+  --steel-050: #F8F8F8;
+  --steel-100: #EEF1F6;
+  --steel-200: #DEE1EB;
+  --steel-300: #C8CBD9;
+  --steel-550: #6D7284;
+  --steel-800: #2E3346;
+  --steel-850: #1C2132;
+  --steel-900: #0A0F25;
+
+  --blue-025: #F7F8FE;
+  --blue-050: #ECF0FD;
+  --blue-100: #E0E7FF;
+  --blue-200: #BCCAFF;
+  --blue-300: #94ABFF;
+  --blue-400: #6B8AFB;
+  --blue-500: #4A6FF3;
+  --blue-600: #234CDA;
+  --alert-100: #FFCFD8;
+  --alert-200: #FF8096;
+  --alert-300: #F35471;
+  --alert-400: #D62852;
+  --alert-500: #BE0B41;
+  --alert-600: #99001C;
+  --alert-600-filter: brightness(0) saturate(100%) invert(15%) sepia(66%) saturate(7196%)
+  hue-rotate(342deg) brightness(59%) contrast(110%);
+
+  --border-radius: 8px;
+  --code-snippet-card-padding: 12px;
+  --code-snippet-card-margin: 24px;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../fonts/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Source Sans Pro Bold";
+  src: url("../fonts/SourceSansPro-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Source Sans Pro Medium";
+  src: url("../fonts/SourceSansPro-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("../fonts/SourceCodePro-Regular.ttf");
+}
+
+* {
+  font-weight: normal;
+}
+
+html {
+  background: var(--blue-025);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  position: relative;
+  font-family: 'Source Sans Pro';
+}
+
+#body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+#container {
+  position: relative;
+  margin: 24px 2rem;
+}

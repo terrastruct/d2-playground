@@ -1,0 +1,102 @@
+.btn {
+  font-size: 14px;
+  padding: 0px 12px;
+  margin-top: 0px;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+  border-radius: 4px;
+  background-color: #ffffff;
+  font-family: "Source Sans Pro Medium";
+  height: 40px;
+}
+
+.btn-shiny {
+  height: 36px;
+  color: #ffffff;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  background-image: radial-gradient(at top right, #6363EE 0%, #4A6FF3 50%, #819CFD 100%);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  color: #234cda;
+  border: 1px solid #94abff;
+
+
+  line-height: 16px;
+}
+
+.btn-primary:hover {
+  background-color: var(--steel-050);
+}
+.btn-primary:active {
+  background-color: #ecf0fd;
+}
+
+.btn-secondary {
+  background-color: var(--steel-000);
+  border: 1px solid var(--steel-200);
+  color: var(--steel-800);
+}
+.btn-secondary:hover {
+  background-color: var(--steel-100);
+}
+.btn-secondary:active {
+  background-color: var(--steel-200);
+}
+
+.btn-disabled {
+  opacity: 0.6;
+  background-color: var(--steel-200);
+  cursor: not-allowed;
+}
+.btn-disabled:hover {
+  background-color: var(--steel-200);
+}
+.btn-disabled:active {
+  background-color: var(--steel-200);
+}
+
+.btn-labeled {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+
+  /* account for caret */
+  padding-right: 32px;
+
+  border: 1px solid #DEE1EB;
+}
+.btn-labeled:hover {
+  background-color: var(--steel-050);
+}
+
+.btn-label {
+  font-family: "Source Sans Pro";
+  font-size: 12px;
+  color: var(--steel-550);
+  line-height: 16px;
+  margin-top: 2px;
+}
+
+.btn-value {
+  font-family: "Source Sans Pro";
+  font-size: 14px;
+  color: var(--steel-800);
+  line-height: 18px;
+}
+
+.btn-labeled-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}

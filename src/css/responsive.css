@@ -1,0 +1,146 @@
+@media only screen and (max-width:768px) {
+  #nav-menu {
+    gap: 16px;
+  }
+  #header-logo > span {
+    display: none;
+  }
+  #hero {
+    height: 100%;
+  }
+  #hero-center-drawing {
+    width: calc(100% - 40px);
+  }
+  #hero-left-drawing {
+    display: none;
+  }
+  #hero-right-drawing {
+    display: none;
+  }
+  #editor-toolbar-left-label {
+    display: none;
+  }
+  .code-snippet-card {
+    width: calc(100% - 24px);
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+  .footer-vertical-divider {
+    display: none;
+  }
+
+  #footer-bottom {
+    flex-direction: column;
+  }
+
+  #shape-friends-img {
+    bottom: 130px;
+  }
+
+  #modal-container {
+    width: calc(100% - 20px) !important;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  #hero {
+    overflow: hidden;
+  }
+  #editor-toolbar {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+  }
+  #workstation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 804px;
+  }
+  #editor, #render {
+    width: 100%;
+    height: 400px;
+  }
+  #workstation-divider {
+    display: inline-block;
+    height: 4px;
+    width: 100%;
+    border-right: 0;
+    border-left: 0;
+    border-top: 1px solid var(--steel-200);
+    border-bottom: 1px solid var(--steel-200);
+    background-color: var(--steel-000);
+  }
+  #render-main {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+}
+
+/* --------------------- */
+/* Hero responsive style */
+/* --------------------- */
+
+@media only screen and (max-width: 850px) and (min-width: 768px) {
+  #hero-left-drawing {
+    left: -294px;
+  }
+  #hero-right-drawing {
+    right: -150px;
+  }
+
+  #container {
+    margin: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 1010px) and (min-width: 850px) {
+  #hero-left-drawing {
+    left: -230px;
+  }
+  #hero-right-drawing {
+    right: -100px;
+  }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 1010px) {
+  #hero-left-drawing {
+    left: -180px;
+  }
+  #hero-right-drawing {
+    right: -70px;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1100px) {
+  #hero-left-drawing {
+    left: -110px;
+  }
+  #hero-right-drawing {
+    right: -50px;
+  }
+}
+
+@media only screen and (max-width: 1270px) and (min-width: 1200px) {
+  #hero-left-drawing {
+    left: -80px;
+  }
+  #hero-right-drawing {
+    right: -20px;
+  }
+}
+
+@media only screen and (min-width: 1270px) {
+  #hero-left-drawing {
+    left: 0px;
+  }
+  #hero-right-drawing {
+    right: 0px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .code-snippet-card-clipboard-button {
+    visibility: visible !important;
+  }
+}

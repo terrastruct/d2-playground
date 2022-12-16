@@ -1,0 +1,45 @@
+#notification {
+  position: fixed;
+  top: 0.5rem;
+  z-index: 8;
+  right: 4%;
+  left: 4%;
+
+  height: 48px;
+  padding: 0 15px;
+
+  box-sizing: border-box;
+  box-shadow: 0px 0px 8px rgba(var(--steel-900), 0.06);
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--steel-800);
+  transition: top 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  background: var(--alert-100);
+  border: 1px solid var(--alert-300);
+}
+
+#notification.notification-inactive {
+  box-shadow: none;
+  top: -3.5rem;
+  opacity: 0;
+  z-index: -1;
+}
+
+#notification-icon {
+  margin-right: 0.5rem;
+  filter: var(--alert-600-filter);
+}
+
+#notification-message {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}

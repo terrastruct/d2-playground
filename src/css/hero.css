@@ -1,0 +1,84 @@
+#hero {
+  position: relative;
+  width: 100%;
+  height: 180px;
+}
+
+#hero-foreground {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#hero-text {
+  margin-top: 12px;
+  color: var(--steel-850);
+  font-size: 14px;
+  font-family: "Source Sans Pro Medium";
+  text-align: center;
+}
+
+#hero-left-drawing, #hero-right-drawing {
+  position: absolute;
+  top: 0;
+}
+#hero-left-drawing {
+  left: 0;
+}
+#hero-right-drawing {
+  right: 0;
+}
+#hero-center-drawing {
+  margin-top: 32px;
+  width: 480px;
+}
+#hero-center-drawing-img {
+  width: 100%;
+}
+
+#hero-left-drawing-img {
+  width: 400px;
+}
+
+#hero-right-drawing-img {
+  width: 400px;
+}
+
+#hero-sketch {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 100px);
+  width: 300px;
+  height: 100%;
+}
+
+#hero-background {
+  position: absolute;
+  top: -50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  z-index: -1;
+}
+
+#grid-fadeout {
+  z-index:-1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+
+  background-size: 20px 20px;
+  background-image:
+  linear-gradient(to right, var(--blue-050) 1px, transparent 1px),
+  linear-gradient(to bottom, var(--blue-050) 1px, transparent 1px);
+
+  -webkit-mask-image: linear-gradient(to top, transparent 10%, black);
+  -moz-mask-image: linear-gradient(to top, transparent 10%, black);
+  mask-image: linear-gradient(to top, transparent 10%, black);
+}

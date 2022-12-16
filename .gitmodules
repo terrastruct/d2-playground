@@ -1,0 +1,6 @@
+[submodule "src/js/d2-vscode"]
+	path = src/js/d2-vscode
+	url = git@github.com:terrastruct/d2-vscode.git
+[submodule "ci/sub"]
+	path = ci/sub
+	url = git@github.com:terrastruct/ci.git
