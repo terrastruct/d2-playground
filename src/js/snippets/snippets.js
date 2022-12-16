@@ -191,7 +191,7 @@ x -> y -> z: onwards!`,
 ];
 
 function stitch() {
-  let html = ''
+  let html = "";
   for (const snippet of snippets) {
     html += `<div class="code-snippet-card">
 <div class="code-snippet-card-title">
@@ -207,11 +207,10 @@ function stitch() {
   </div>
   ${snippet.code}
   </div>
-</div>`
+</div>`;
   }
   return html;
 }
-
 
 function init() {
   const stitched = stitch();
@@ -230,7 +229,7 @@ function arrangeSnippetCards() {
   const windowWidth = document.body.clientWidth;
   if (windowWidth <= 768) {
     columnCounts = 1;
-  } else if ((windowWidth > 768) && (windowWidth < 1280)) {
+  } else if (windowWidth > 768 && windowWidth < 1280) {
     columnCounts = 3;
   } else {
     columnCounts = 4;
@@ -241,7 +240,10 @@ function arrangeSnippetCards() {
   const cardPadding = 12;
   const cardBorder = 1;
   const gapTotalSize = gapSize * (columnCounts - 1);
-  const cardWidth = Math.floor((codeSnippetsContainerEl.clientWidth - gapTotalSize) / columnCounts) - (cardPadding * 2) - (cardBorder * 2);
+  const cardWidth =
+    Math.floor((codeSnippetsContainerEl.clientWidth - gapTotalSize) / columnCounts) -
+    cardPadding * 2 -
+    cardBorder * 2;
 
   const codeSnippetsCardEls = document.getElementsByClassName("code-snippet-card");
   for (const codeSnippetsCardEl of codeSnippetsCardEls) {
@@ -257,19 +259,24 @@ async function copyCode(block) {
 }
 
 function attachClipboardListener() {
-  const codeSnippetsClipboardButtonEls = document.getElementsByClassName("code-snippet-card-clipboard-button");
+  const codeSnippetsClipboardButtonEls = document.getElementsByClassName(
+    "code-snippet-card-clipboard-button"
+  );
   for (const clipboardButtonEl of codeSnippetsClipboardButtonEls) {
     clipboardButtonEl.addEventListener("click", () => {
       copyCode(clipboardButtonEl.parentElement);
 
       // show copied UI
-      clipboardButtonEl.querySelector(".clipboard-icon").src = "assets/icons/checkcircle.svg";
+      clipboardButtonEl.querySelector(".clipboard-icon").src =
+        "assets/icons/checkcircle.svg";
       clipboardButtonEl.querySelector(".clipboard-tooltip-text").textContent = "Copied";
 
       // restore original UI
       setTimeout(() => {
-        clipboardButtonEl.querySelector(".clipboard-icon").src = "assets/icons/clipboard.svg";
-        clipboardButtonEl.querySelector(".clipboard-tooltip-text").textContent = "Copy to clipboard";
+        clipboardButtonEl.querySelector(".clipboard-icon").src =
+          "assets/icons/clipboard.svg";
+        clipboardButtonEl.querySelector(".clipboard-tooltip-text").textContent =
+          "Copy to clipboard";
       }, 2000);
     });
   }

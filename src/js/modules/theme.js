@@ -26,7 +26,7 @@ const themeIDs = {
   "Mixed berry blue": 5,
   "Cool classics": 4,
   "Grape soda": 6,
-  "Aubergine": 7,
+  Aubergine: 7,
   "Colorblind clear": 8,
   "Vanilla nitro cola": 100,
   "Orange creamsicle": 101,
@@ -34,7 +34,7 @@ const themeIDs = {
   "Earth tones": 103,
   "Everglade green": 104,
   "Buttered toast": 105,
-}
+};
 
 const idToTheme = {};
 
@@ -59,7 +59,7 @@ function readQueryParam() {
   const theme = idToTheme[paramTheme];
   if (theme) {
     document.getElementById("current-theme").textContent = theme;
-    return
+    return;
   } else {
     QueryParams.del("theme");
   }
@@ -108,4 +108,4 @@ function hideMenu() {
 export default {
   init,
   getThemeID,
-}
+};

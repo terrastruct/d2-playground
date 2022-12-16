@@ -11,7 +11,8 @@ function init() {
 
 // https://stackoverflow.com/a/36672683
 function toggleFullscreen() {
-  const isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+  const isInFullScreen =
+    (document.fullscreenElement && document.fullscreenElement !== null) ||
     (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
     (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
     (document.msFullscreenElement && document.msFullscreenElement !== null);
@@ -42,4 +43,4 @@ function toggleFullscreen() {
 
 export default {
   init,
-}
+};

@@ -1,45 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>D2 Playground</title>
 
-    <meta content='An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams.' name='description' />
-    <meta name="robots" content="follow, index">
-    <meta property='og:url' content='https://play.d2lang.com' />
-    <link rel='canonical' href='https://play.d2lang.com' />
+    <meta
+      content="An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams."
+      name="description"
+    />
+    <meta name="robots" content="follow, index" />
+    <meta property="og:url" content="https://play.d2lang.com" />
+    <link rel="canonical" href="https://play.d2lang.com" />
 
-    <meta property='og:type' content="website" />
-    <meta property='og:site_name' content='D2 Playground' />
-    <meta property='og:description' content='An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams.' />
-    <meta property='og:title' content='D2 Playground' />
-    <meta name='image' property='og:image' content="https://play.d2lang.com/assets/images/og.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="D2 Playground" />
+    <meta
+      property="og:description"
+      content="An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams."
+    />
+    <meta property="og:title" content="D2 Playground" />
+    <meta
+      name="image"
+      property="og:image"
+      content="https://play.d2lang.com/assets/images/og.png"
+    />
 
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:site' content='@terrastruct' />
-    <meta name='twitter:title' content='D2 Playground' />
-    <meta name='twitter:description' content='An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams.' />
-    <meta name='twitter:image' content="https://play.d2lang.com/assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@terrastruct" />
+    <meta name="twitter:title" content="D2 Playground" />
+    <meta
+      name="twitter:description"
+      content="An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams."
+    />
+    <meta name="twitter:image" content="https://play.d2lang.com/assets/images/og.png" />
 
     <link href="build/style.css" rel="stylesheet" />
   </head>
   <body>
     <div id="notification" class="notification-inactive">
       <div id="notification-icon">
-        <img id="notification-icon-img" src="assets/icons/warning_triangle.svg" alt="error icon" />
+        <img
+          id="notification-icon-img"
+          src="assets/icons/warning_triangle.svg"
+          alt="error icon"
+        />
       </div>
       <div id="notification-message"></div>
     </div>
     <div id="modal" style="display: none">
       <div id="modal-container">
         <div id="modal-close">
-          <img id="modal-close-icon" alt="Close" src="assets/icons/close.svg">
+          <img id="modal-close-icon" alt="Close" src="assets/icons/close.svg" />
         </div>
         <div id="modal-header"></div>
         <div id="modal-content"></div>
         <div id="modal-footer">
           <div id="modal-footer-options">
-            <button id="modal-secondary-option" class="btn btn-secondary modal-footer-option">
+            <button
+              id="modal-secondary-option"
+              class="btn btn-secondary modal-footer-option"
+            >
               Close
             </button>
             <button id="modal-primary-option" class="btn btn-primary modal-footer-option">
@@ -52,7 +72,7 @@
 
     <div id="header">
       <div id="header-logo">
-        <img src="assets/icons/d2-logo.svg" class="d2-logo-img"/>
+        <img src="assets/icons/d2-logo.svg" class="d2-logo-img" />
         <span class="logo-d2-label">D2</span>
         <span id="header-playground-label">Playground</span>
       </div>
@@ -61,9 +81,7 @@
         <a class="nav-menu-item" href="https://d2lang.com">Docs</a>
         <a class="nav-menu-item" href="https://github.com/terrastruct/d2">Github</a>
         <a class="nav-menu-item" href="https://github.com/terrastruct/d2#install">
-          <button class="btn btn-shiny">
-            Download CLI
-          </button>
+          <button class="btn btn-shiny">Download CLI</button>
         </a>
       </div>
     </div>
@@ -74,68 +92,81 @@
         <div id="hero-foreground">
           <div id="hero-left-drawing">
             <picture>
-              <source srcset="assets/images/hero-left-drawing.webp" type="image/webp">
-              <img id="hero-left-drawing-img" loading="lazy" src="assets/images/hero-left-drawing.png" />
+              <source srcset="assets/images/hero-left-drawing.webp" type="image/webp" />
+              <img
+                id="hero-left-drawing-img"
+                loading="lazy"
+                src="assets/images/hero-left-drawing.png"
+              />
             </picture>
           </div>
           <div id="hero-center-drawing">
             <picture>
-              <source srcset="assets/images/hero-center-drawing.webp" type="image/webp">
-              <img id="hero-center-drawing-img" loading="lazy" src="assets/images/hero-center-drawing.png"/>
+              <source srcset="assets/images/hero-center-drawing.webp" type="image/webp" />
+              <img
+                id="hero-center-drawing-img"
+                loading="lazy"
+                src="assets/images/hero-center-drawing.png"
+              />
             </picture>
             <div id="hero-text">
-              An online runner to play, learn, and create with D2, the modern diagram scripting language that turns text to diagrams.
+              An online runner to play, learn, and create with D2, the modern diagram
+              scripting language that turns text to diagrams.
             </div>
           </div>
           <div id="hero-right-drawing">
             <picture>
-              <source srcset="assets/images/hero-right-drawing.webp" type="image/webp">
-              <img id="hero-right-drawing-img" loading="lazy" src="assets/images/hero-right-drawing.png" />
+              <source srcset="assets/images/hero-right-drawing.webp" type="image/webp" />
+              <img
+                id="hero-right-drawing-img"
+                loading="lazy"
+                src="assets/images/hero-right-drawing.png"
+              />
             </picture>
           </div>
         </div>
         <div id="hero-background">
           <picture>
-            <source srcset="assets/images/sketch.webp" type="image/webp">
+            <source srcset="assets/images/sketch.webp" type="image/webp" />
             <img loading="lazy" src="assets/images/sketch.png" id="hero-sketch" />
           </picture>
         </div>
       </div>
-      <div id="grid-fadeout">
-      </div>
+      <div id="grid-fadeout"></div>
       <div id="container">
         <div id="workstation">
           <div id="editor" class="workstation-side">
             <div id="editor-toolbar" class="workstation-toolbar">
               <div id="editor-toolbar-left" class="workstation-toolbar-left">
-                <div id="editor-toolbar-left-label">
-                  Live editor
-                </div>
+                <div id="editor-toolbar-left-label">Live editor</div>
               </div>
               <div id="editor-toolbar-right" class="workstation-toolbar-right">
-                <img src="assets/icons/key.svg" id="key" class="clickable-icon" style="display:none" />
+                <img
+                  src="assets/icons/key.svg"
+                  id="key"
+                  class="clickable-icon"
+                  style="display: none"
+                />
                 <div class="btn-menu-container">
                   <button id="layout-btn" class="btn btn-labeled">
-                    <div class="btn-label">
-                      Layout engine
-                    </div>
+                    <div class="btn-label">Layout engine</div>
                     <div id="current-layout" class="btn-value">Dagre</div>
-                    <img src="assets/icons/down-grey.svg" class="btn-labeled-icon"/>
+                    <img src="assets/icons/down-grey.svg" class="btn-labeled-icon" />
                   </button>
-                  <div id="layout-menu" class="btn-menu" style="display:none">
+                  <div id="layout-menu" class="btn-menu" style="display: none">
                     <div class="btn-menu-item layout-menu-item">Dagre</div>
                     <div class="btn-menu-item layout-menu-item">ELK</div>
                     <div class="btn-menu-item layout-menu-item">TALA</div>
                   </div>
                 </div>
                 <button id="compile-btn" class="btn btn-primary">
-                  <img src="assets/icons/play.svg" class="btn-icon"/>
+                  <img src="assets/icons/play.svg" class="btn-icon" />
                   Compile
                 </button>
               </div>
             </div>
             <div id="editor-main" class="workstation-main"></div>
-            <div id="editor-errors" style="display:none;"></div>
+            <div id="editor-errors" style="display: none"></div>
           </div>
 
           <div id="workstation-divider"></div>
@@ -145,13 +176,11 @@
               <div id="render-toolbar-left" class="workstation-toolbar-left">
                 <div class="btn-menu-container">
                   <button id="theme-btn" class="btn btn-labeled">
-                    <div class="btn-label">
-                      Theme
-                    </div>
+                    <div class="btn-label">Theme</div>
                     <div id="current-theme" class="btn-value">Neutral default</div>
-                    <img src="assets/icons/down-grey.svg" class="btn-labeled-icon"/>
+                    <img src="assets/icons/down-grey.svg" class="btn-labeled-icon" />
                   </button>
-                  <div id="theme-menu" class="btn-menu" style="display:none">
+                  <div id="theme-menu" class="btn-menu" style="display: none">
                     <!-- populated by JS -->
                   </div>
                 </div>
@@ -160,19 +189,21 @@
                 <div id="export" class="btn-menu-container">
                   <button id="export-btn" class="btn btn-primary">
                     Export
-                    <img src="assets/icons/down.svg" class="btn-icon"/>
+                    <img src="assets/icons/down.svg" class="btn-icon" />
                   </button>
-                  <div id="export-menu" class="btn-menu" style="display:none">
+                  <div id="export-menu" class="btn-menu" style="display: none">
                     <div id="export-menu-png" class="btn-menu-item">PNG</div>
                     <div id="export-menu-svg" class="btn-menu-item">SVG</div>
                   </div>
                 </div>
                 <div class="btn-menu-container">
-                  <img src="assets/icons/zoom.svg" id="zoom" class="clickable-icon"/>
-                  <div id="zoom-menu" class="btn-menu" style="display:none">
+                  <img src="assets/icons/zoom.svg" id="zoom" class="clickable-icon" />
+                  <div id="zoom-menu" class="btn-menu" style="display: none">
                     <input
                       type="range"
-                      style="background: linear-gradient(to right, #6b8afb 50%, #d8dce9 50%)"
+                      style="
+                        background: linear-gradient(to right, #6b8afb 50%, #d8dce9 50%);
+                      "
                       min="0.1"
                       max="15"
                       step="0.1"
@@ -185,52 +216,68 @@
                     </button>
                   </div>
                 </div>
-                <img src="assets/icons/expand.svg" id="fullscreen" class="clickable-icon"/>
+                <img
+                  src="assets/icons/expand.svg"
+                  id="fullscreen"
+                  class="clickable-icon"
+                />
               </div>
             </div>
             <div id="render-main" class="workstation-main">
-              <div id="loading-shroud" style="display:none">
+              <div id="loading-shroud" style="display: none">
                 <div id="loading-spinner-container">
-                  <svg id="loading-spinner" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
+                  <svg
+                    id="loading-spinner"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                  >
                     <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M27.5702 17.7957L35.0306 13.4883C35.3176 13.3226 35.4159 12.9557 35.2502 12.6687L33.9752 10.4603C33.8095 10.1733 33.4426 10.075 33.1556 10.2406L25.7491 14.5169C24.3156 12.9692 22.2691 12.0009 19.9971 12.0009C17.7255 12.0009 15.6792 12.969 14.2458 14.5163L6.84307 10.2422C6.55609 10.0765 6.18914 10.1749 6.02346 10.4618L4.74845 12.6703C4.58277 12.9573 4.68109 13.3242 4.96807 13.4899L12.4243 17.7949C12.2437 18.4578 12.1473 19.1556 12.1473 19.8759C12.1473 23.5777 14.6932 26.6829 18.1243 27.5254V36.2801C18.1243 36.6115 18.393 36.8801 18.7243 36.8801H21.2743C21.6057 36.8801 21.8743 36.6115 21.8743 36.2801V27.5243C25.3032 26.6802 27.847 23.5761 27.847 19.8759C27.847 19.1559 27.7506 18.4584 27.5702 17.7957ZM15.9095 19.8759C15.9095 17.5931 17.7509 15.7631 19.9971 15.7631C22.2433 15.7631 24.0848 17.5931 24.0848 19.8759C24.0848 22.1587 22.2433 23.9887 19.9971 23.9887C17.7509 23.9887 15.9095 22.1587 15.9095 19.8759Z"
-                        fill="#B5B9CA"
-                        />
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M27.5702 17.7957L35.0306 13.4883C35.3176 13.3226 35.4159 12.9557 35.2502 12.6687L33.9752 10.4603C33.8095 10.1733 33.4426 10.075 33.1556 10.2406L25.7491 14.5169C24.3156 12.9692 22.2691 12.0009 19.9971 12.0009C17.7255 12.0009 15.6792 12.969 14.2458 14.5163L6.84307 10.2422C6.55609 10.0765 6.18914 10.1749 6.02346 10.4618L4.74845 12.6703C4.58277 12.9573 4.68109 13.3242 4.96807 13.4899L12.4243 17.7949C12.2437 18.4578 12.1473 19.1556 12.1473 19.8759C12.1473 23.5777 14.6932 26.6829 18.1243 27.5254V36.2801C18.1243 36.6115 18.393 36.8801 18.7243 36.8801H21.2743C21.6057 36.8801 21.8743 36.6115 21.8743 36.2801V27.5243C25.3032 26.6802 27.847 23.5761 27.847 19.8759C27.847 19.1559 27.7506 18.4584 27.5702 17.7957ZM15.9095 19.8759C15.9095 17.5931 17.7509 15.7631 19.9971 15.7631C22.2433 15.7631 24.0848 17.5931 24.0848 19.8759C24.0848 22.1587 22.2433 23.9887 19.9971 23.9887C17.7509 23.9887 15.9095 22.1587 15.9095 19.8759Z"
+                      fill="#B5B9CA"
+                    />
                     <path
-                        d="M18.125 3.725C18.125 3.39363 18.3936 3.125 18.725 3.125L21.275 3.125C21.6064 3.125 21.875 3.39363 21.875 3.725V8.77516C21.875 9.10653 21.6064 9.37516 21.275 9.37516H18.725C18.3936 9.37516 18.125 9.10653 18.125 8.77516V3.725Z"
-                        fill="#F8F8FB"
-                        />
+                      d="M18.125 3.725C18.125 3.39363 18.3936 3.125 18.725 3.125L21.275 3.125C21.6064 3.125 21.875 3.39363 21.875 3.725V8.77516C21.875 9.10653 21.6064 9.37516 21.275 9.37516H18.725C18.3936 9.37516 18.125 9.10653 18.125 8.77516V3.725Z"
+                      fill="#F8F8FB"
+                    />
                     <path
-                        d="M35.0312 26.5164C35.3181 26.6821 35.4165 27.049 35.2508 27.336L33.9758 29.5445C33.8101 29.8314 33.4431 29.9298 33.1562 29.7641L28.7827 27.239C28.4958 27.0733 28.3974 26.7064 28.5631 26.4194L29.8381 24.2109C30.0038 23.924 30.3708 23.8256 30.6577 23.9913L35.0312 26.5164Z"
-                        fill="#F8F8FB"
-                        />
+                      d="M35.0312 26.5164C35.3181 26.6821 35.4165 27.049 35.2508 27.336L33.9758 29.5445C33.8101 29.8314 33.4431 29.9298 33.1562 29.7641L28.7827 27.239C28.4958 27.0733 28.3974 26.7064 28.5631 26.4194L29.8381 24.2109C30.0038 23.924 30.3708 23.8256 30.6577 23.9913L35.0312 26.5164Z"
+                      fill="#F8F8FB"
+                    />
                     <path
-                        d="M6.84383 29.7625C6.55686 29.9282 6.18991 29.8299 6.02422 29.5429L4.74921 27.3344C4.58353 27.0475 4.68186 26.6805 4.96883 26.5148L9.34226 23.9898C9.62924 23.8241 9.99619 23.9224 10.1619 24.2094L11.4369 26.4178C11.6026 26.7048 11.5042 27.0717 11.2173 27.2374L6.84383 29.7625Z"
-                        fill="#F8F8FB"
-                        />
+                      d="M6.84383 29.7625C6.55686 29.9282 6.18991 29.8299 6.02422 29.5429L4.74921 27.3344C4.58353 27.0475 4.68186 26.6805 4.96883 26.5148L9.34226 23.9898C9.62924 23.8241 9.99619 23.9224 10.1619 24.2094L11.4369 26.4178C11.6026 26.7048 11.5042 27.0717 11.2173 27.2374L6.84383 29.7625Z"
+                      fill="#F8F8FB"
+                    />
                   </svg>
                 </div>
               </div>
               <div id="render-svg"></div>
             </div>
           </div>
-
         </div>
         <div id="code-snippets-header">Syntax snippets</div>
-        <div id="code-snippets-container">
-        </div>
+        <div id="code-snippets-container"></div>
       </div>
     </div>
     <div id="footer">
       <picture>
-        <source srcset="assets/images/shape-friends.webp" type="image/webp" id="shape-friends-img" />
-        <img loading="lazy" src="assets/images/shape-friends.png" id="shape-friends-img" />
+        <source
+          srcset="assets/images/shape-friends.webp"
+          type="image/webp"
+          id="shape-friends-img"
+        />
+        <img
+          loading="lazy"
+          src="assets/images/shape-friends.png"
+          id="shape-friends-img"
+        />
       </picture>
       <div id="footer-top">
         <div id="footer-logo">
-          <img src="assets/icons/d2-logo.svg" class="d2-logo-img"/>
+          <img src="assets/icons/d2-logo.svg" class="d2-logo-img" />
           <span class="logo-d2-label">D2</span>
           <span id="footer-playground-label">Playground</span>
         </div>
@@ -248,20 +295,17 @@
         <div class="footer-bottom-content">
           Created by
           <a href="https://terrastruct.com">
-            <img src="assets/images/terrastruct-wordmark-logo.svg" id="footer-logo">
+            <img src="assets/images/terrastruct-wordmark-logo.svg" id="footer-logo" />
           </a>
         </div>
         <div class="footer-vertical-divider">|</div>
-        <div class="footer-bottom-content">
-          &copy; 2022 Terrastruct, Inc.
-        </div>
+        <div class="footer-bottom-content">&copy; 2022 Terrastruct, Inc.</div>
       </div>
     </div>
-  <script src="js/vendor/panzoom.js"></script>
-  <script src="build/out.js"></script>
-  </script>
-  <link href="build/out.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <script defer src="js/snippets/snippets.js"></script>
-  <script defer data-domain="play.d2lang.com" src="/js/script.js"></script>
-</body>
+    <script src="js/vendor/panzoom.js"></script>
+    <script src="build/out.js"></script>
+    <link href="build/out.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <script defer src="js/snippets/snippets.js"></script>
+    <script defer data-domain="play.d2lang.com" src="/js/script.js"></script>
+  </body>
 </html>

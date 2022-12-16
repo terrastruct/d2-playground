@@ -15,13 +15,22 @@
   left: 0px;
   right: 0px;
   top: 56px;
-  background: linear-gradient(89.97deg, #FDD4BA 0.02%, #F5B7C5 15.12%, #ADA9EF 33.86%, #73B6FC 51.04%, #66B1FC 63.01%, #4F74F4 82.27%, #2E30EE 99.98%);
+  background: linear-gradient(
+    89.97deg,
+    #fdd4ba 0.02%,
+    #f5b7c5 15.12%,
+    #ada9ef 33.86%,
+    #73b6fc 51.04%,
+    #66b1fc 63.01%,
+    #4f74f4 82.27%,
+    #2e30ee 99.98%
+  );
 }
 #header-logo {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: 'Source Code Pro';
+  font-family: "Source Code Pro";
 }
 .d2-logo-img {
   width: 32px;
@@ -49,7 +58,7 @@
   color: var(--steel-800);
   outline: none;
   text-decoration: none;
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
 }
 
 .nav-menu-item:hover {

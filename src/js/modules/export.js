@@ -32,7 +32,7 @@ function exportSVG() {
     return;
   }
 
-  const blob = new Blob([renderEl.innerHTML], {type:"image/svg+xml;charset=utf-8"});
+  const blob = new Blob([renderEl.innerHTML], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const dl = document.createElement("a");
   dl.href = url;
@@ -88,4 +88,4 @@ async function exportPNG() {
 
 export default {
   init,
-}
+};

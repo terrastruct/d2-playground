@@ -16,4 +16,4 @@ function is() {
 
 export default {
   is,
-}
+};

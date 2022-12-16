@@ -24,4 +24,4 @@ export default {
   get,
   set,
   del,
-}
+};

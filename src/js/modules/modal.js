@@ -10,13 +10,17 @@ function show(headerString, contentHTML, primaryActionText, primaryActionCallbac
   document.getElementById("modal-content").innerHTML = contentHTML;
   document.getElementById("modal").style.display = "block";
   document.getElementById("modal-primary-option").textContent = primaryActionText;
-  document.getElementById("modal-primary-option").addEventListener("click", primaryActionCallback);
+  document
+    .getElementById("modal-primary-option")
+    .addEventListener("click", primaryActionCallback);
   primaryCallback = primaryActionCallback;
 }
 
 function close() {
   if (primaryCallback) {
-    document.getElementById("modal-primary-option").removeEventListener("click", primaryCallback);
+    document
+      .getElementById("modal-primary-option")
+      .removeEventListener("click", primaryCallback);
     primaryCallback = null;
   }
   document.getElementById("modal").style.display = "none";
@@ -26,4 +30,4 @@ export default {
   show,
   close,
   init,
-}
+};

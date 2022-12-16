@@ -8,7 +8,7 @@
   padding: 48px 40px;
   display: flex;
   flex-direction: column;
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
 }
 #shape-friends-img {
   position: absolute;
@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: 'Source Code Pro';
+  font-family: "Source Code Pro";
 }
 #footer-logo > .logo-d2-label {
   color: var(--steel-000);

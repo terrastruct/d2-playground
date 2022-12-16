@@ -17,4 +17,4 @@ function set(k, v) {
 export default {
   get,
   set,
-}
+};

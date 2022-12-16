@@ -27,7 +27,7 @@ function inputTALAKey() {
   let content = `<div id="key-explanation">
     TALA is a proprietary layout engine. It is free to evaluate, but requires a valid license key to remove the watermark. You can find more information about TALA and license keys <a href="https://terrastruct.com/tala/">here</a>.
   </div>
-  <textarea id="key-input" placeholder="tstruct_XXX">${talaKey||""}</textarea>`;
+  <textarea id="key-input" placeholder="tstruct_XXX">${talaKey || ""}</textarea>`;
 
   Modal.show("TALA License Key", content, "Attach to browser requests", attachKey);
 }
@@ -105,4 +105,4 @@ export default {
   init,
   getLayout,
   getTALAKey,
-}
+};

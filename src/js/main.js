@@ -29,7 +29,10 @@ async function init() {
 
 async function initD2() {
   const go = new Go();
-  const res = await WebAssembly.instantiateStreaming(fetch("../d2.wasm"), go.importObject);
+  const res = await WebAssembly.instantiateStreaming(
+    fetch("../d2.wasm"),
+    go.importObject
+  );
   go.run(res.instance);
   // Alert.show("9:41", 3000);
 }

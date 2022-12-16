@@ -118,7 +118,7 @@ function displayCompileErrors(errs) {
             range.end.column
           ),
           options: {
-            marginClassName: "ErrorLineGutter"
+            marginClassName: "ErrorLineGutter",
           },
         };
       })
@@ -151,13 +151,13 @@ function displayCompileErrors(errs) {
       },
     ];
   }
-  let errContent = '';
+  let errContent = "";
   for (const err of errs) {
     errContent += `<div class="editor-errors-line">${err.errmsg}</div>`;
   }
   const displayEl = document.getElementById("editor-errors");
   displayEl.innerHTML = errContent;
-  displayEl.style.display = 'block';
+  displayEl.style.display = "block";
 }
 
 function clearCompileErrors() {
@@ -168,8 +168,8 @@ function clearCompileErrors() {
   }
 
   const displayEl = document.getElementById("editor-errors");
-  displayEl.innerHTML = '';
-  displayEl.style.display = 'none';
+  displayEl.innerHTML = "";
+  displayEl.style.display = "none";
 }
 
 async function compile() {
@@ -185,7 +185,10 @@ async function compile() {
 
   const encodeResult = JSON.parse(d2Encode(script));
   if (encodeResult.result == "") {
-    Alert.show(`D2 encountered an encoding error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`, 6000);
+    Alert.show(
+      `D2 encountered an encoding error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      6000
+    );
     return;
   }
   const encoded = encodeResult.result;
@@ -206,7 +209,10 @@ async function compile() {
       return;
     } else if (parsed.d2Error != "") {
       unlockCompileBtn();
-      Alert.show(`D2 encountered a compile error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`, 6000);
+      Alert.show(
+        `D2 encountered a compile error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        6000
+      );
       return;
     }
   }
@@ -219,18 +225,24 @@ async function compile() {
 
   const headers = {};
   if (layout == "tala" && talaKey) {
-    headers['x-tala-key'] = talaKey;
+    headers["x-tala-key"] = talaKey;
   }
 
   let response;
   try {
-    response = await fetch(`https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`, {
-      headers,
-      method: 'GET'
-    });
-  } catch(e) {
+    response = await fetch(
+      `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`,
+      {
+        headers,
+        method: "GET",
+      }
+    );
+  } catch (e) {
     // 4-500s do not throw
-    Alert.show(`Unexpected error occurred. Please make sure you are connected to the internet.`, 6000);
+    Alert.show(
+      `Unexpected error occurred. Please make sure you are connected to the internet.`,
+      6000
+    );
     hideLoader();
     unlockCompileBtn();
     return;
@@ -238,15 +250,24 @@ async function compile() {
   hideLoader();
   unlockCompileBtn();
   if (response.status === 500) {
-    Alert.show(`D2 encountered an API error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`, 6000);
+    Alert.show(
+      `D2 encountered an API error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      6000
+    );
     return;
   }
   if (response.status === 403) {
-    Alert.show(`You're doing that a bit too much. Please reach out to us at hi@d2lang.com if you're a human.`, 6000);
+    Alert.show(
+      `You're doing that a bit too much. Please reach out to us at hi@d2lang.com if you're a human.`,
+      6000
+    );
     return;
   }
   if (!response.ok) {
-    Alert.show(`D2 encountered an unexpected error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`, 6000);
+    Alert.show(
+      `D2 encountered an unexpected error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      6000
+    );
     return;
   }
   const svg = await response.text();
@@ -346,4 +367,4 @@ export default {
   clearCompileErrors,
   getEditor,
   compile,
-}
+};

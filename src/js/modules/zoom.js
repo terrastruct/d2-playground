@@ -27,14 +27,17 @@ function attach() {
     minZoom: MIN_ZOOM,
     // Prevent zooming on scroll
     // Doesn't affect pinching btw, which has ctrlKey set for some reason
-    beforeWheel: function(e) {
+    beforeWheel: function (e) {
       return !e.ctrlKey;
-    }
+    },
   });
-  panzoomInstance.on('zoom', function(e) {
-    if (isShowingZoom() && document.activeElement !== document.getElementById("zoom-slider")) {
+  panzoomInstance.on("zoom", function (e) {
+    if (
+      isShowingZoom() &&
+      document.activeElement !== document.getElementById("zoom-slider")
+    ) {
       // TODO maybe throttle
-      setZoomSlider(e.getTransform().scale)
+      setZoomSlider(e.getTransform().scale);
     }
   });
 }
@@ -59,7 +62,7 @@ function toggleZoom() {
     }
 
     document.getElementById("zoom-menu").style.display = "flex";
-    setZoomSlider(panzoomInstance.getTransform().scale)
+    setZoomSlider(panzoomInstance.getTransform().scale);
   }
 }
 
@@ -69,7 +72,9 @@ function isShowingZoom() {
 
 function setZoomSlider(val) {
   const percentage = ((val - MIN_ZOOM) / (MAX_ZOOM - MIN_ZOOM)) * 100;
-  document.getElementById("zoom-slider").style.background = `linear-gradient(to right, #6b8afb ${percentage}%, #d8dce9 ${percentage}%)`;
+  document.getElementById(
+    "zoom-slider"
+  ).style.background = `linear-gradient(to right, #6b8afb ${percentage}%, #d8dce9 ${percentage}%)`;
   document.getElementById("zoom-slider").value = val;
 }
 
@@ -87,13 +92,15 @@ function onZoomSlider(e) {
   // TODO this zooms to center, of diagram, but it'd be nice to zoom to center of viewport
   const origin = panzoomInstance.getTransform();
 
-  const cx = origin.x + (width*origin.scale)/2;
-  const cy = origin.y + (height*origin.scale)/2;
+  const cx = origin.x + (width * origin.scale) / 2;
+  const cy = origin.y + (height * origin.scale) / 2;
 
   panzoomInstance.zoomAbs(cx, cy, desiredZoom);
 
   const percentage = ((desiredZoom - MIN_ZOOM) / (MAX_ZOOM - MIN_ZOOM)) * 100;
-  document.getElementById("zoom-slider").style.background = `linear-gradient(to right, #6b8afb ${percentage}%, #d8dce9 ${percentage}%)`;
+  document.getElementById(
+    "zoom-slider"
+  ).style.background = `linear-gradient(to right, #6b8afb ${percentage}%, #d8dce9 ${percentage}%)`;
 }
 
 export default {
@@ -101,4 +108,4 @@ export default {
   attach,
   MIN_ZOOM,
   MAX_ZOOM,
-}
+};

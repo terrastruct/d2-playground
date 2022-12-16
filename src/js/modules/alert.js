@@ -18,4 +18,4 @@ function show(msg, duration) {
 
 export default {
   show,
-}
+};

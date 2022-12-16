@@ -20,7 +20,8 @@
   padding: 0.4rem 0.8rem;
   background: var(--steel-050);
 }
-#editor-toolbar, #render-toolbar {
+#editor-toolbar,
+#render-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -107,7 +108,7 @@
   box-sizing: border-box;
   margin: 8px;
   color: var(--steel-800);
-  font-family: 'Source Code Pro';
+  font-family: "Source Code Pro";
   font-size: 12px;
 }
 
@@ -118,10 +119,12 @@
   border-left: 1px solid var(--steel-200);
 }
 
-#editor-toolbar-left-label, #render-toolbar-left-label {
+#editor-toolbar-left-label,
+#render-toolbar-left-label {
   padding-left: 16px;
 }
-#editor-toolbar-right, #render-toolbar-right {
+#editor-toolbar-right,
+#render-toolbar-right {
   display: flex;
   gap: 12px;
 }
