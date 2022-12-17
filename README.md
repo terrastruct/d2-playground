@@ -16,7 +16,7 @@
 # Table of Contents
 
 <!-- toc -->
-<a href="#faq" id="toc-faq">FAQ</a>
+- <a href="#faq" id="toc-faq">FAQ</a>
   - <a href="#what-is-this-written-in" id="toc-what-is-this-written-in">What is this written in?</a>
   - <a href="#how-does-it-work" id="toc-how-does-it-work">How does it work?</a>
   - <a href="#whats-this-api" id="toc-whats-this-api">What's this API?</a>
