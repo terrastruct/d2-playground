@@ -2,4 +2,4 @@ const DUMMY_SVG = `<!--?xml version="1.0" encoding="utf-8"?--><svg style="backgr
 
 export default {
   DUMMY_SVG,
-}
+};
