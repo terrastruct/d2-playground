@@ -18,7 +18,8 @@ func main() {
 			".js":  api.LoaderJSX,
 			".ttf": api.LoaderBase64,
 		},
-		Write: true,
+		Write:  true,
+		Define: map[string]string{"ENV": "\"DEV\""},
 		Watch: &api.WatchMode{
 			OnRebuild: func(result api.BuildResult) {
 				if len(result.Errors) > 0 {

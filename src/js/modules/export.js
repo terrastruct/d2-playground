@@ -53,8 +53,8 @@ async function exportPNG() {
     return;
   }
   const svgEl = document.getElementById("diagram");
-  const width = svgEl.getAttribute("width").slice(0, -2);
-  const height = svgEl.getAttribute("height").slice(0, -2);
+  const width = svgEl.getAttribute("width").slice(0, -2) * window.devicePixelRatio;
+  const height = svgEl.getAttribute("height").slice(0, -2) * window.devicePixelRatio;
 
   // TODO online says I need XMLSerializer().serializeToString(svgEl)
   // but it works without that. Revisit in case bugs.

@@ -8,6 +8,7 @@ import Zoom from "./zoom.js";
 import Alert from "./alert.js";
 
 import QueryParams from "../lib/queryparams";
+import Stubs from "../lib/stubs";
 
 const MAX_ERRORS = 5;
 
@@ -228,54 +229,63 @@ async function compile() {
     headers["x-tala-key"] = talaKey;
   }
 
-  let response;
-  try {
-    response = await fetch(
-      `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`,
-      {
-        headers,
-        method: "GET",
-      }
-    );
-  } catch (e) {
-    // 4-500s do not throw
-    Alert.show(
-      `Unexpected error occurred. Please make sure you are connected to the internet.`,
-      6000
-    );
+  let svg;
+  if (ENV === "PRODUCTION") {
+    let response;
+    try {
+      response = await fetch(
+        `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`,
+        {
+          headers,
+          method: "GET",
+        }
+      );
+    } catch (e) {
+      // 4-500s do not throw
+      Alert.show(
+        `Unexpected error occurred. Please make sure you are connected to the internet.`,
+        6000
+      );
+      hideLoader();
+      unlockCompileBtn();
+      return;
+    }
     hideLoader();
     unlockCompileBtn();
-    return;
+    if (response.status === 500) {
+      Alert.show(
+        `D2 encountered an API error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        6000
+      );
+      return;
+    }
+    if (response.status === 403) {
+      Alert.show(
+        `You're doing that a bit too much. Please reach out to us at hi@d2lang.com if you're a human.`,
+        6000
+      );
+      return;
+    }
+    if (!response.ok) {
+      Alert.show(
+        `D2 encountered an unexpected error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        6000
+      );
+      return;
+    }
+    svg = await response.text();
+  } else {
+    svg = Stubs.DUMMY_SVG;
+    hideLoader();
+    unlockCompileBtn();
   }
-  hideLoader();
-  unlockCompileBtn();
-  if (response.status === 500) {
-    Alert.show(
-      `D2 encountered an API error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
-      6000
-    );
-    return;
-  }
-  if (response.status === 403) {
-    Alert.show(
-      `You're doing that a bit too much. Please reach out to us at hi@d2lang.com if you're a human.`,
-      6000
-    );
-    return;
-  }
-  if (!response.ok) {
-    Alert.show(
-      `D2 encountered an unexpected error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
-      6000
-    );
-    return;
-  }
-  const svg = await response.text();
   const renderEl = document.getElementById("render-svg");
   const containerWidth = renderEl.getBoundingClientRect().width;
   const containerHeight = renderEl.getBoundingClientRect().height;
   renderEl.innerHTML = svg;
-  const svgEl = renderEl.firstChild.nextSibling.nextSibling;
+
+  // skip over the xml version tag
+  const svgEl = renderEl.lastChild;
 
   svgEl.id = "diagram";
   Zoom.attach();
