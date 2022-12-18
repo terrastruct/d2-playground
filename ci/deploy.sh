@@ -35,7 +35,7 @@ copyfiles=(
 build() {
   mkdir -p dist
 
-  esbuild src/js/main.js --bundle --minify --loader:.js=jsx --loader:.ttf=base64 --outfile=dist/build/out.js
+  esbuild src/js/main.js --bundle --minify --define:ENV=\\\"PRODUCTION\\\" --loader:.js=jsx --loader:.ttf=base64 --outfile=dist/build/out.js
   esbuild src/css/main.css --bundle --minify --loader:.svg=base64 --loader:.ttf=base64 --outfile=dist/build/style.css
   # https://github.com/tdewolff/minify/tree/master/cmd/minify
   minify -o dist/index.html src/index.html
