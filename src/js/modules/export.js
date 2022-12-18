@@ -42,7 +42,6 @@ function exportSVG() {
   document.body.removeChild(dl);
 }
 
-// TODO min resolution. Small diagrams look blurry
 async function exportPNG() {
   hideMenu();
 
