@@ -1,4 +1,5 @@
 import Alert from "./alert.js";
+import Editor from "./editor.js";
 
 function init() {
   document.getElementById("export-btn").addEventListener("click", toggleMenu);
@@ -21,18 +22,16 @@ function hideMenu() {
 }
 
 // TODO these don't download on mobile
-//
 function exportSVG() {
   hideMenu();
 
-  const renderEl = document.getElementById("render-svg");
-  const svg = renderEl.innerHTML;
+  const svg = Editor.getDiagramSVG();
   if (svg == "") {
     Alert.show(`Compile a diagram to export`, 4000);
     return;
   }
 
-  const blob = new Blob([renderEl.innerHTML], { type: "image/svg+xml;charset=utf-8" });
+  const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const dl = document.createElement("a");
   dl.href = url;
@@ -45,8 +44,7 @@ function exportSVG() {
 async function exportPNG() {
   hideMenu();
 
-  const renderEl = document.getElementById("render-svg");
-  const svg = renderEl.innerHTML;
+  const svg = Editor.getDiagramSVG();
   if (svg == "") {
     Alert.show(`Compile a diagram to export`, 4000);
     return;
@@ -69,7 +67,16 @@ async function exportPNG() {
       tempImg.src = encoded;
     });
   };
-  const img = await loadImage();
+  let img;
+  try {
+    img = await loadImage();
+  } catch (e) {
+    Alert.show(
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      4000
+    );
+    return;
+  }
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;

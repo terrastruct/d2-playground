@@ -15,6 +15,8 @@ const MAX_ERRORS = 5;
 let monacoEditor;
 let monacoLineDecorators = [];
 
+let diagramSVG;
+
 async function init() {
   if (useMonaco()) {
     await initMonaco();
@@ -282,6 +284,7 @@ async function compile() {
   const renderEl = document.getElementById("render-svg");
   const containerWidth = renderEl.getBoundingClientRect().width;
   const containerHeight = renderEl.getBoundingClientRect().height;
+  diagramSVG = svg;
   renderEl.innerHTML = svg;
 
   // skip over the xml version tag
@@ -362,6 +365,10 @@ function getEditor() {
   return monacoEditor;
 }
 
+function getDiagramSVG() {
+  return diagramSVG;
+}
+
 // NOTE monaco editor is purported to not work on mobile
 // https://github.com/microsoft/monaco-editor/issues/246
 // But I've tested it on all my devices and it works.
@@ -375,6 +382,7 @@ export default {
   init,
   displayCompileErrors,
   clearCompileErrors,
+  getDiagramSVG,
   getEditor,
   compile,
 };
