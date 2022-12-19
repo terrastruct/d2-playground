@@ -6,7 +6,11 @@ if [ ! -e "$(dirname "$0")/ci/sub/.git" ]; then
   set +x
 fi
 . "$(dirname "$0")/ci/sub/lib.sh"
-PATH="$(cd -- "$(dirname "$0")" && pwd)/ci/sub/bin:$PATH"
 cd "$(dirname "$0")"
 
-_make "$@"
+job_parseflags "$@"
+runjob fmt ./ci/sub/bin/fmt.sh &
+runjob lint ci_go_lint &
+runjob build 'go build ./...' &
+runjob test 'go test ./...' &
+ci_waitjobs
