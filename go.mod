@@ -1,4 +1,4 @@
-module play.d2lang.com
+module oss.terrastruct.com/d2-playground
 
 go 1.18
 
