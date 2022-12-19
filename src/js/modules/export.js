@@ -70,8 +70,11 @@ async function exportPNG() {
   let img;
   try {
     img = await loadImage();
-  } catch(e) {
-    Alert.show(`Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`, 4000);
+  } catch (e) {
+    Alert.show(
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      4000
+    );
     return;
   }
   const canvas = document.createElement("canvas");
