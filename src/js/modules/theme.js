@@ -85,7 +85,9 @@ function changeTheme(name) {
   document.getElementById("current-theme").textContent = name;
   hideMenu();
   QueryParams.set("theme", themeIDs[name]);
-  Editor.compile();
+  if (Editor.getDiagramSVG()) {
+    Editor.compile();
+  }
 }
 
 function getThemeID() {

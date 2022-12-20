@@ -1,5 +1,6 @@
 import Modal from "./modal";
 import Alert from "./alert";
+import Editor from "./editor.js";
 
 import QueryParams from "../lib/queryparams";
 import LocalStorage from "../lib/localstorage";
@@ -70,6 +71,9 @@ function chooseLayout(e) {
   QueryParams.set("layout", layout);
   setKeyVisibility();
   hideMenu();
+  if (Editor.getDiagramSVG()) {
+    Editor.compile();
+  }
 }
 
 function toggleMenu() {
