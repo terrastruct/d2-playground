@@ -14,7 +14,7 @@ function init() {
   document.getElementById("key").addEventListener("click", inputTALAKey);
 
   for (const el of document.getElementsByClassName("layout-menu-item")) {
-    el.addEventListener("click", chooseLayout);
+    el.addEventListener("click", changeLayout);
   }
 
   const storedKey = LocalStorage.get("talaKey");
@@ -65,7 +65,7 @@ function readQueryParam() {
   }
 }
 
-function chooseLayout(e) {
+function changeLayout(e) {
   layout = e.target.textContent.toLowerCase();
   document.getElementById("current-layout").textContent = e.target.textContent;
   QueryParams.set("layout", layout);
