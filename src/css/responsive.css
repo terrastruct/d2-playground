@@ -84,10 +84,10 @@
 
 @media only screen and (max-width: 850px) and (min-width: 768px) {
   #hero-left-drawing {
-    left: -294px;
+    left: -364px;
   }
   #hero-right-drawing {
-    right: -240px;
+    right: -340px;
   }
 
   #container {
@@ -97,41 +97,50 @@
 
 @media only screen and (max-width: 1010px) and (min-width: 850px) {
   #hero-left-drawing {
-    left: -230px;
+    left: -330px;
   }
   #hero-right-drawing {
-    right: -200px;
+    right: -300px;
   }
 }
 
 @media only screen and (max-width: 1100px) and (min-width: 1010px) {
   #hero-left-drawing {
-    left: -180px;
+    left: -260px;
   }
   #hero-right-drawing {
-    right: -115px;
+    right: -215px;
   }
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 1100px) {
   #hero-left-drawing {
-    left: -110px;
+    left: -210px;
   }
   #hero-right-drawing {
-    right: -60px;
+    right: -180px;
   }
 }
 
 @media only screen and (max-width: 1270px) and (min-width: 1200px) {
   #hero-left-drawing {
-    left: -80px;
+    left: -160px;
   }
   #hero-right-drawing {
-    right: -20px;
+    right: -120px;
   }
 }
 
-@media only screen and (min-width: 1270px) {
+@media only screen and (max-width: 1500px) and (min-width: 1270px) {
+  #hero-left-drawing {
+    left: -100px;
+  }
+  #hero-right-drawing {
+    right: -100px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
   #hero-left-drawing {
     left: 0px;
   }
