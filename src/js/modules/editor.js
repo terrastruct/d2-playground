@@ -4,6 +4,7 @@ import { getLanguageProvider } from "../monaco/index.ts";
 
 import Theme from "./theme.js";
 import Layout from "./layout.js";
+import Sketch from "./sketch.js";
 import Zoom from "./zoom.js";
 import Alert from "./alert.js";
 
@@ -236,7 +237,7 @@ async function compile() {
     let response;
     try {
       response = await fetch(
-        `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`,
+        `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}&sketch=${Sketch.getValue()}`,
         {
           headers,
           method: "GET",

@@ -184,6 +184,24 @@
                     <!-- populated by JS -->
                   </div>
                 </div>
+
+                <div id="sketch">
+                  Sketch
+                  <div class="toggle">
+                    <input
+                        type="checkbox"
+                        class="toggle-checkbox"
+                        name="sketch-checkbox"
+                        id="sketch-checkbox"
+                        />
+                    <label class="toggle-label" for="sketch-checkbox">
+                      <span class="toggle-inner" />
+                        <span class="toggle-switch">
+                          <img id="sketch-toggle-icon" class="toggle-icon" src="assets/icons/toggle_x.svg" />
+                        </span>
+                    </label>
+                  </div>
+                </div>
               </div>
               <div id="render-toolbar-right" class="workstation-toolbar-right">
                 <div id="export" class="btn-menu-container">
@@ -196,7 +214,7 @@
                     <div id="export-menu-svg" class="btn-menu-item">SVG</div>
                   </div>
                 </div>
-                <div class="btn-menu-container">
+                <div id="zoom-container" class="btn-menu-container">
                   <img src="assets/icons/zoom.svg" id="zoom" class="clickable-icon" />
                   <div id="zoom-menu" class="btn-menu" style="display: none">
                     <input

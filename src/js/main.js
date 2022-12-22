@@ -8,6 +8,7 @@ import Theme from "./modules/theme.js";
 import Zoom from "./modules/zoom.js";
 import Layout from "./modules/layout.js";
 import Modal from "./modules/modal.js";
+import Sketch from "./modules/sketch.js";
 // import Alert from "./modules/alert.js";
 
 (async () => {
@@ -16,7 +17,9 @@ import Modal from "./modules/modal.js";
 
 async function init() {
   await initD2();
+  // TODO should this go after the rest?
   Editor.init();
+  Sketch.init();
   Export.init();
   Fullscreen.init();
   Theme.init();

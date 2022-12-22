@@ -20,6 +20,13 @@
   #editor-toolbar-left-label {
     display: none;
   }
+  #sketch {
+    flex-direction: column;
+    gap: 2px;
+  }
+  #zoom-container {
+    display: none;
+  }
   .code-snippet-card {
     width: calc(100% - 24px);
     margin-right: 0;
