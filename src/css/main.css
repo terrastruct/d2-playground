@@ -2,6 +2,7 @@
 @import "./modal.css";
 @import "./range.css";
 @import "./button.css";
+@import "./toggle.css";
 
 @import "./header.css";
 @import "./hero.css";
@@ -21,6 +22,7 @@
   --steel-100: #eef1f6;
   --steel-200: #dee1eb;
   --steel-300: #c8cbd9;
+  --steel-400: #a7acbd;
   --steel-550: #6d7284;
   --steel-800: #2e3346;
   --steel-850: #1c2132;
@@ -46,6 +48,10 @@
   --border-radius: 8px;
   --code-snippet-card-padding: 12px;
   --code-snippet-card-margin: 24px;
+
+  --switch-width: 1.75rem;
+  --switch-height: 0.75rem;
+  --toggle-height: calc(0.75rem + 4px);
 }
 
 @font-face {
