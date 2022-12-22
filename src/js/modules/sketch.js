@@ -45,4 +45,4 @@ function getValue() {
 export default {
   init,
   getValue,
-}
+};
