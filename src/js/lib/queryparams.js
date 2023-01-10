@@ -2,7 +2,7 @@ function del(k) {
   const url = new URL(window.location);
   const params = url.searchParams;
   params.delete(k);
-  window.history.replaceState(null, null, `?${params.toString()}`);
+  setParams(params.toString());
 }
 
 function get(k) {
@@ -16,8 +16,18 @@ function set(k, v) {
   const params = url.searchParams;
   if (params.get("k") !== v) {
     params.set(k, v);
-    window.history.replaceState(null, null, `?${params.toString()}`);
+    setParams(params.toString());
   }
+}
+
+function setParams(v) {
+  if (!v.startsWith("?")) {
+    v = "?" + v;
+  }
+  if (!v.endsWith("&")) {
+    v = v + "&";
+  }
+  window.history.replaceState(null, null, v);
 }
 
 export default {
