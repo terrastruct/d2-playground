@@ -9,6 +9,8 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
+var port = "9090"
+
 func main() {
 	result := api.Build(api.BuildOptions{
 		EntryPoints: []string{"./src/js/main.js"},
@@ -63,7 +65,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("watching...\n")
+	fmt.Printf("watching on localhost:%s...\n", port)
 	go serve()
 
 	// Returning from main() exits immediately in Go.
@@ -72,7 +74,7 @@ func main() {
 }
 
 func serve() {
-	err := http.ListenAndServe(":9090", http.FileServer(http.Dir("src")))
+	err := http.ListenAndServe(fmt.Sprintf(":%s", port), http.FileServer(http.Dir("src")))
 	if err != nil {
 		fmt.Println("Failed to start server", err)
 		return
