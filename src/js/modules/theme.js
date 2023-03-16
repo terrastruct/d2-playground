@@ -4,7 +4,7 @@ import QueryParams from "../lib/queryparams";
 
 const themes = [
   "Neutral default",
-  "Neutral Grey",
+  "Neutral gray",
   "Flagship Terrastruct",
   "Mixed berry blue",
   "Cool classics",
@@ -17,11 +17,14 @@ const themes = [
   "Earth tones",
   "Everglade green",
   "Buttered toast",
+  "Dark mauve",
+  "Terminal",
+  "Terminal grayscale",
 ];
 
 const themeIDs = {
   "Neutral default": 0,
-  "Neutral Grey": 1,
+  "Neutral grey": 1,
   "Flagship Terrastruct": 3,
   "Mixed berry blue": 5,
   "Cool classics": 4,
@@ -34,6 +37,9 @@ const themeIDs = {
   "Earth tones": 103,
   "Everglade green": 104,
   "Buttered toast": 105,
+  "Dark mauve": 200,
+  "Terminal": 300,
+  "Terminal grayscale": 301,
 };
 
 const idToTheme = {};
