@@ -38,7 +38,7 @@ const themeIDs = {
   "Everglade green": 104,
   "Buttered toast": 105,
   "Dark mauve": 200,
-  "Terminal": 300,
+  Terminal: 300,
   "Terminal grayscale": 301,
 };
 

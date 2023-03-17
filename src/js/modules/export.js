@@ -49,15 +49,15 @@ async function exportPNG() {
     Alert.show(`Compile a diagram to export`, 4000);
     return;
   }
-  const svgEl = document.getElementById("diagram");
+  const svgEl = document.getElementById("d2-svg");
 
   const viewBox = svgEl.getAttribute("viewBox").split(" ");
   const width = parseFloat(viewBox[2]) * window.devicePixelRatio;
   const height = parseFloat(viewBox[3]) * window.devicePixelRatio;
 
-  // TODO online says I need XMLSerializer().serializeToString(svgEl)
-  // but it works without that. Revisit in case bugs.
-  const encoded = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
+  const encoded =
+    "data:image/svg+xml;base64," +
+    btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(svgEl))));
 
   const tempImg = new Image();
   const loadImage = () => {
