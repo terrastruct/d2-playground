@@ -24,7 +24,7 @@ const themes = [
 
 const themeIDs = {
   "Neutral default": 0,
-  "Neutral grey": 1,
+  "Neutral gray": 1,
   "Flagship Terrastruct": 3,
   "Mixed berry blue": 5,
   "Cool classics": 4,
