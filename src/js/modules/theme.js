@@ -40,6 +40,7 @@ const themeIDs = {
   "Dark mauve": 200,
   Terminal: 300,
   "Terminal grayscale": 301,
+  Origami: 302,
 };
 
 const idToTheme = {};
