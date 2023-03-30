@@ -20,6 +20,7 @@ const themes = [
   "Dark mauve",
   "Terminal",
   "Terminal grayscale",
+  "Origami",
 ];
 
 const themeIDs = {
