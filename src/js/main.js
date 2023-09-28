@@ -33,9 +33,14 @@ async function init() {
 async function initD2() {
   const go = new Go();
   const res = await WebAssembly.instantiateStreaming(
-    fetch("../d2.wasm"),
+    fetch("../d2.9a8acbb.wasm"),
     go.importObject
   );
+  const callback = new Promise((resolve) => {
+    // @ts-ignore
+    window.onWasmInitialized = resolve;
+  });
   go.run(res.instance);
+  await callback;
   // Alert.show("9:41", 3000);
 }
