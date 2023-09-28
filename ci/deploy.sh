@@ -75,7 +75,7 @@ main() {
 
   brotli -c src/js/vendor/onig.wasm > dist/js/vendor/onig.wasm
   brotli -c src/d2.9a8acbb.wasm > dist/d2.9a8acbb.wasm
-  aws s3 cp dist/d2.wasm ${PLAYGROUND_S3_BUCKET} --content-encoding br --content-type application/wasm
+  aws s3 cp dist/d2.9a8acbb.wasm ${PLAYGROUND_S3_BUCKET} --content-encoding br --content-type application/wasm
 
   bigheader "Invalidating cache"
 
