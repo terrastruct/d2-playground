@@ -33,7 +33,7 @@ async function init() {
 async function initD2() {
   const go = new Go();
   const res = await WebAssembly.instantiateStreaming(
-    fetch("../d2.64453f1.wasm"),
+    fetch("../d2.af84172.wasm"),
     go.importObject
   );
   const callback = new Promise((resolve) => {
