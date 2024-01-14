@@ -7,13 +7,24 @@
   box-shadow: var(--shadow-md);
 }
 
-.workstation-side {
+.workstation-editor {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: calc(50% - 1px);
+  width: 50%;
+  min-width: 300px;
+  resize: horizontal;
+  overflow: scroll;
 }
+
+.workstation-renderer {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  position: relative;
+}
+
 .workstation-toolbar {
   display: flex;
   justify-content: space-between;
