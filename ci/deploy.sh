@@ -74,8 +74,8 @@ main() {
   # TODO only run wasm if differs from dist. slow.
 
   brotli -c src/js/vendor/onig.wasm > dist/js/vendor/onig.wasm
-  brotli -c src/d2.af84172.wasm > dist/d2.af84172.wasm
-  aws s3 cp dist/d2.af84172.wasm ${PLAYGROUND_S3_BUCKET} --content-encoding br --content-type application/wasm
+  brotli -c src/d2.wasm > dist/d2.wasm
+  aws s3 cp dist/d2.wasm ${PLAYGROUND_S3_BUCKET} --content-encoding br --content-type application/wasm
 
   bigheader "Invalidating cache"
 
