@@ -1,6 +1,6 @@
 // NOTE Editor must be imported before wasm_exec.
 import Editor from "./modules/editor.js";
-import "./vendor/wasm_exec_go120.js";
+import "./vendor/wasm_exec_go122.js";
 
 import Export from "./modules/export.js";
 import Fullscreen from "./modules/fullscreen.js";
