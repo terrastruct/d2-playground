@@ -1,6 +1,6 @@
 // NOTE Editor must be imported before wasm_exec.
 import Editor from "./modules/editor.js";
-import "./vendor/wasm_exec_go120.js";
+import "./vendor/wasm_exec_go122.js";
 
 import Export from "./modules/export.js";
 import Fullscreen from "./modules/fullscreen.js";
@@ -33,7 +33,7 @@ async function init() {
 async function initD2() {
   const go = new Go();
   const res = await WebAssembly.instantiateStreaming(
-    fetch("../d2.af84172.wasm"),
+    fetch("../d2.wasm"),
     go.importObject
   );
   const callback = new Promise((resolve) => {
