@@ -198,7 +198,7 @@ async function compile() {
     return;
   }
   const encoded = encodeResult.result;
-  const urlEncoded = encodeURIComponent(encoded);
+  const urlEncoded = encodeURIComponent(window.location.href);
 
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
