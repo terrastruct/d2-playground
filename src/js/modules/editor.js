@@ -190,12 +190,15 @@ async function compile() {
   const encodeResult = JSON.parse(d2Encode(script));
   if (encodeResult.result == "") {
     Alert.show(
-      `D2 encountered an encoding error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
+        script
+      )}">Github</a>.`,
       6000
     );
     return;
   }
   const encoded = encodeResult.result;
+  const urlEncoded = encodeURIComponent(encoded);
 
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
@@ -214,7 +217,7 @@ async function compile() {
     } else if (parsed.d2Error != "") {
       unlockCompileBtn();
       Alert.show(
-        `D2 encountered a compile error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        `D2 encountered a compile error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
       );
       return;
@@ -257,7 +260,7 @@ async function compile() {
     unlockCompileBtn();
     if (response.status === 500) {
       Alert.show(
-        `D2 encountered an API error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        `D2 encountered an API error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
       );
       return;
@@ -271,7 +274,7 @@ async function compile() {
     }
     if (!response.ok) {
       Alert.show(
-        `D2 encountered an unexpected error. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+        `D2 encountered an unexpected error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
       );
       return;
