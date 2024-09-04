@@ -27,6 +27,9 @@ async function init() {
   Layout.init();
   Modal.init();
 
+  const versionDOM = document.getElementById("hero-text-version");
+  versionDOM.innerHTML = `d2 version: ${d2Version()}`;
+
   // TODO defer load hero images all the way here
 }
 
