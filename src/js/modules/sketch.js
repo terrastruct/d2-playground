@@ -4,7 +4,9 @@ import QueryParams from "../lib/queryparams";
 
 function init() {
   readQueryParam();
-  document.getElementById("sketch-checkbox").addEventListener("change", toggleSketch);
+  document.getElementById("sketch-checkbox").addEventListener("change", (e) => toggleSketch(e.target.checked));
+  document.getElementById("sketch-mobile-icon").addEventListener("click", () => toggleSketch(QueryParams.get("sketch") === "0"));
+  updateMobileIcon(QueryParams.get("sketch") === "1");
 }
 
 function readQueryParam() {
@@ -24,9 +26,9 @@ function readQueryParam() {
   }
 }
 
-function toggleSketch(e) {
+function toggleSketch(on) {
   const icon = document.getElementById("sketch-toggle-icon");
-  if (e.target.checked) {
+  if (on) {
     icon.src = "assets/icons/toggle_check.svg";
     QueryParams.set("sketch", "1");
   } else {
@@ -35,6 +37,18 @@ function toggleSketch(e) {
   }
   if (Editor.getDiagramSVG()) {
     Editor.compile();
+  }
+
+  updateMobileIcon(on);
+}
+
+function updateMobileIcon(on) {
+  const icon = document.getElementById("sketch-mobile");
+
+  if (on) {
+    icon.classList.add("sketch-mobile-activated");
+  } else {
+    icon.classList.remove("sketch-mobile-activated");
   }
 }
 

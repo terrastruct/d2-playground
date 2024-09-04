@@ -36,6 +36,8 @@
   --blue-400: #6b8afb;
   --blue-500: #4a6ff3;
   --blue-600: #234cda;
+  --blue-600-filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(3335%)
+    hue-rotate(227deg) brightness(88%) contrast(94%);
   --alert-100: #ffcfd8;
   --alert-200: #ff8096;
   --alert-300: #f35471;
