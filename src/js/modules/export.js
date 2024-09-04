@@ -55,7 +55,9 @@ async function exportPNG() {
   const width = parseFloat(viewBox[2]) * window.devicePixelRatio;
   const height = parseFloat(viewBox[3]) * window.devicePixelRatio;
 
-  const blob = new Blob([new XMLSerializer().serializeToString(svgEl)], {type: 'image/svg+xml'});
+  const blob = new Blob([new XMLSerializer().serializeToString(svgEl)], {
+    type: "image/svg+xml",
+  });
   const encoded = URL.createObjectURL(blob);
 
   const tempImg = new Image();

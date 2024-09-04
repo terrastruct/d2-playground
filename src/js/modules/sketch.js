@@ -4,8 +4,12 @@ import QueryParams from "../lib/queryparams";
 
 function init() {
   readQueryParam();
-  document.getElementById("sketch-checkbox").addEventListener("change", (e) => toggleSketch(e.target.checked));
-  document.getElementById("sketch-mobile-icon").addEventListener("click", () => toggleSketch(QueryParams.get("sketch") === "0"));
+  document
+    .getElementById("sketch-checkbox")
+    .addEventListener("change", (e) => toggleSketch(e.target.checked));
+  document
+    .getElementById("sketch-mobile-icon")
+    .addEventListener("click", () => toggleSketch(QueryParams.get("sketch") === "0"));
   updateMobileIcon(QueryParams.get("sketch") === "1");
 }
 
