@@ -21,8 +21,26 @@
     display: none;
   }
   #sketch {
+    display: none;
+  }
+  #sketch-mobile {
+    display: flex !important;
     flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    padding: 0.4rem;
+    border-radius: 4px;
+  }
+  #sketch-mobile-icon {
+    margin-top: 2px;
+  }
+  .sketch-mobile-activated {
+    background: var(--blue-050);
+    #sketch-mobile-icon {
+      filter: var(--blue-600-filter);
+    }
+  }
+  #download-cli {
+    display: none;
   }
   #zoom-container {
     display: none;

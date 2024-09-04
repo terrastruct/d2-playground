@@ -14,9 +14,18 @@
 #hero-text {
   margin-top: 12px;
   color: var(--steel-850);
+  text-align: center;
+}
+
+#hero-text-tagline {
   font-size: 14px;
   font-family: "Source Sans Pro Medium";
-  text-align: center;
+}
+
+#hero-text-version {
+  font-size: 12px;
+  margin-top: 0.4rem;
+  color: var(--steel-550);
 }
 
 #hero-left-drawing,

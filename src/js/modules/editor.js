@@ -77,6 +77,7 @@ async function initMonaco() {
     () => undefined
   );
   monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, compile);
+  monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, compile);
   provider.registry.setTheme(lightTheme);
   monaco.editor.setTheme(lightTheme);
 

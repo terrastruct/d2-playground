@@ -5,3 +5,4 @@ node_modules
 build
 dist
 d2-playground
+.DS_Store

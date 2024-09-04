@@ -87,6 +87,7 @@
         >
         <a
           class="nav-menu-item"
+          id="download-cli"
           target="_blank"
           href="https://github.com/terrastruct/d2#install"
         >
@@ -119,8 +120,11 @@
               />
             </picture>
             <div id="hero-text">
-              An online runner to play, learn, and create with D2, the modern diagram
-              scripting language that turns text to diagrams.
+              <div id="hero-text-tagline">
+                An online runner to play, learn, and create with D2, the modern diagram
+                scripting language that turns text to diagrams.
+              </div>
+              <div id="hero-text-version"></div>
             </div>
           </div>
           <div id="hero-right-drawing">
@@ -214,6 +218,13 @@
                       </span>
                     </label>
                   </div>
+                </div>
+                <div id="sketch-mobile" style="display: none">
+                  <img
+                    id="sketch-mobile-icon"
+                    src="assets/icons/sketch.svg"
+                    class="btn-icon"
+                  />
                 </div>
               </div>
               <div id="render-toolbar-right" class="workstation-toolbar-right">
@@ -330,7 +341,7 @@
           </a>
         </div>
         <div class="footer-vertical-divider">|</div>
-        <div class="footer-bottom-content">&copy; 2023 Terrastruct, Inc.</div>
+        <div class="footer-bottom-content">&copy; 2024 Terrastruct, Inc.</div>
       </div>
     </div>
     <script src="js/vendor/panzoom.js"></script>
