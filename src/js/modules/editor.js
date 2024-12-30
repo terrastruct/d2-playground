@@ -84,9 +84,9 @@ async function initMonaco() {
   let initialScript = "x -> y";
   const paramScript = QueryParams.get("script");
   if (paramScript) {
-    const decodedResult = JSON.parse(d2Decode(paramScript));
-    if (decodedResult.result !== "") {
-      initialScript = decodedResult.result;
+    const decodedResult = JSON.parse(window.d2.decode(paramScript));
+    if (decodedResult.data?.result !== "") {
+      initialScript = decodedResult.data.result;
     } else {
       QueryParams.del("script");
     }
@@ -188,8 +188,8 @@ async function compile() {
     script += "\n";
   }
 
-  const encodeResult = JSON.parse(d2Encode(script));
-  if (encodeResult.result == "") {
+  const encodeResult = JSON.parse(window.d2.encode(script));
+  if (encodeResult.data?.result == "") {
     Alert.show(
       `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
         script
@@ -198,46 +198,66 @@ async function compile() {
     );
     return;
   }
-  const encoded = encodeResult.result;
+  const encoded = encodeResult.data.result;
   const urlEncoded = encodeURIComponent(window.location.href);
 
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
 
-  const compiled = d2Compile(script);
-  if (compiled) {
-    let parsed = JSON.parse(compiled);
-    if (parsed.result != "") {
-      script = parsed.result;
-      setScript(script);
-    } else if (parsed.userError != "") {
-      parsed = JSON.parse(parsed.userError);
-      displayCompileErrors(parsed.errs);
-      unlockCompileBtn();
-      return;
-    } else if (parsed.d2Error != "") {
-      unlockCompileBtn();
-      Alert.show(
-        `D2 encountered a compile error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
-        6000
-      );
-      return;
-    }
-  }
-  clearCompileErrors();
+  const fs = {fs: {"index": script}};
 
   showLoader();
+  clearCompileErrors();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  // await new Promise(resolve => requestAnimationFrame(resolve));
+
+  const compiled = await new Promise((resolve, reject) => {
+    try {
+      const result = JSON.parse(window.d2.compile(JSON.stringify(fs)));
+      resolve(result);
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+  if (compiled.error) {
+    throw new Error(compiled.error);
+  }
+
+  // const compiled = JSON.parse(window.d2.compile(JSON.stringify(fs)));
+  // console.log(compiled);
+
+  if (compiled.error) {
+  }
+
+  // if (parsed.result != "") {
+  //   script = parsed.result;
+  //   setScript(script);
+  // } else if (parsed.userError != "") {
+  //   parsed = JSON.parse(parsed.userError);
+  //   displayCompileErrors(parsed.errs);
+  //   unlockCompileBtn();
+  //   return;
+  // } else if (parsed.d2Error != "") {
+  //   unlockCompileBtn();
+  //   Alert.show(
+  //     `D2 encountered a compile error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+  //     6000
+  //   );
+  //   return;
+  // }
 
   const talaKey = Layout.getTALAKey();
   const layout = Layout.getLayout();
 
-  const headers = {};
-  if (layout == "tala" && talaKey) {
-    headers["x-tala-key"] = talaKey;
-  }
 
   let svg;
-  if (ENV === "PRODUCTION") {
+  // TALA currently goes through server, all others use WASM
+  if (layout === "tala") {
+    const headers = {};
+    if (talaKey) {
+      headers["x-tala-key"] = talaKey;
+    }
     let response;
     try {
       response = await fetch(
@@ -282,7 +302,12 @@ async function compile() {
     }
     svg = await response.text();
   } else {
-    svg = Stubs.DUMMY_SVG;
+    const renderInput = {"diagram": compiled.data.diagram};
+    const rendered = JSON.parse(window.d2.render(JSON.stringify(renderInput)));
+    let svgData = atob(rendered.data);
+    // center it
+    svgData = svgData.replace(`preserveAspectRatio="xMinYMin meet"`, `preserveAspectRatio="xMidYMid meet"`);
+    svg = svgData;
     hideLoader();
     unlockCompileBtn();
   }
@@ -338,9 +363,12 @@ function parsePosition(ps) {
 
 function showLoader() {
   document.getElementById("loading-shroud").style.display = "flex";
+  // await new Promise(resolve => requestAnimationFrame(resolve));
 }
 function hideLoader() {
+  console.log("hiding loader");
   document.getElementById("loading-shroud").style.display = "none";
+  // await new Promise(resolve => requestAnimationFrame(resolve));
 }
 
 function lockCompileBtn() {
