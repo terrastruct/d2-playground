@@ -43,6 +43,8 @@
   font-family: "Source Sans Pro Medium";
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  color: var(--steel-850);
+  background-color: var(--steel-000);
 }
 
 #modal-content {
@@ -50,6 +52,8 @@
   padding: 1.4rem;
   min-height: 5rem;
   overflow-y: auto;
+  background-color: var(--steel-000);
+  color: var(--steel-800);
 }
 
 #modal-close {
@@ -62,9 +66,10 @@
   cursor: pointer;
 }
 
-#modal-close-cion {
+#modal-close-icon {
   width: 1rem;
   height: 1rem;
+  filter: var(--modal-close-icon-filter);
 }
 
 #modal-footer {
@@ -75,6 +80,7 @@
   padding: 0 1.4rem;
   padding-top: 1rem;
   margin-top: auto;
+  background-color: var(--steel-000);
 }
 
 #modal-footer-options {

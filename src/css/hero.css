@@ -12,7 +12,8 @@
 }
 
 #hero-text {
-  margin-top: 12px;
+  /* make version more visible */
+  /* margin-top: 12px; */
   color: var(--steel-850);
   text-align: center;
 }
@@ -43,8 +44,9 @@
   margin-top: 32px;
   width: 480px;
 }
-#hero-center-drawing-img {
+.hero-center-drawing-img {
   width: 100%;
+  margin-bottom: 0.4rem;
 }
 
 #hero-left-drawing-img {
