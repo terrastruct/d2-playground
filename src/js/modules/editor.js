@@ -1,7 +1,10 @@
 import lightTheme from "../d2-vscode/themes/light-color-theme.json";
+import darkTheme from "../d2-vscode/themes/dark-color-theme.json";
+
 import * as monaco from "monaco-editor";
 import { getLanguageProvider } from "../monaco/index.ts";
 
+import WebTheme from "./web_theme.js";
 import Theme from "./theme.js";
 import Layout from "./layout.js";
 import Sketch from "./sketch.js";
@@ -16,36 +19,82 @@ const MAX_ERRORS = 5;
 let monacoEditor;
 let monacoLineDecorators = [];
 
+// preserve state
+let monacoValue;
+let monacoPosition;
+
 let diagramSVG;
 
 async function init() {
+  // init theme btn
+  WebTheme.init();
+  const toggleThemeBtn = document.getElementById("btn-toggle-theme");
+  toggleThemeBtn.addEventListener("click", async (e) => {
+    // debug
+    // console.log("Theme changed!");
+
+    WebTheme.toggleTheme();
+
+    const theme =
+      localStorage.getItem("theme") === "light"
+        ? lightTheme
+        : localStorage.getItem("theme") === "dark"
+        ? darkTheme
+        : (() => {
+            throw new Error(
+              `Invalid "theme" value in Local Storage: ${localStorage.getItem("theme")}`
+            );
+          })();
+    await switchMonaco(theme);
+  });
+
   if (useMonaco()) {
-    await initMonaco();
+    await initMonaco(getCurrentTheme());
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", async (e) => {
+        // when "theme" is set, system color theme is overriden
+        if (!localStorage.getItem("theme")) {
+          const newTheme = e.matches ? darkTheme : lightTheme;
+          await switchMonaco(newTheme);
+        }
+      });
   } else {
-    initTextArea();
+    // init text area
+    const editorEl = document.getElementById("editor-main");
+    editorEl.innerHTML = "<textarea id='mobile-editor'>x -> y</textarea>";
   }
 
-  attachListeners();
+  document.getElementById("compile-btn").addEventListener("click", compile);
   compile();
 }
 
-async function initMonaco() {
+async function initMonaco(theme) {
   const editorEl = document.getElementById("editor-main");
-  const provider = await getLanguageProvider(lightTheme);
-
-  monaco.editor.defineTheme("Light", {
-    base: "vs",
+  const provider = await getLanguageProvider(theme);
+  const monacoTheme = {
+    base:
+      theme.type === "light"
+        ? "vs"
+        : theme.type === "dark"
+        ? "vs-dark"
+        : (() => {
+            throw new Error(`Invalid theme type: ${theme.type}`);
+          })(),
     inherit: true,
-    colors: lightTheme.colors,
     rules: [],
-  });
-  lightTheme.settings = lightTheme.tokenColors;
+    colors: theme.colors,
+  };
+
+  monaco.editor.defineTheme(String(theme.name).replace(/ /g, "-"), monacoTheme);
+  theme.settings = theme.tokenColors;
 
   monacoEditor = monaco.editor.create(editorEl, {
     language: "d2",
     automaticLayout: true,
     contextmenu: true,
-    theme: lightTheme,
+    theme: theme,
     tabSize: 2,
     autoIndent: "full",
     minimap: {
@@ -78,32 +127,50 @@ async function initMonaco() {
   );
   monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, compile);
   monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, compile);
-  provider.registry.setTheme(lightTheme);
-  monaco.editor.setTheme(lightTheme);
+  provider.registry.setTheme(theme);
+  monaco.editor.setTheme(String(theme.name).replace(/ /g, "-"));
 
-  let initialScript = "x -> y";
-  const paramScript = QueryParams.get("script");
-  if (paramScript) {
-    const decodedResult = JSON.parse(d2Decode(paramScript));
-    if (decodedResult.result !== "") {
-      initialScript = decodedResult.result;
-    } else {
-      QueryParams.del("script");
+  if (monacoValue || monacoPosition) {
+    monacoEditor.setValue(monacoValue);
+    monacoEditor.setPosition(monacoPosition);
+  } else {
+    let initialScript = "x -> y";
+    const paramScript = QueryParams.get("script");
+    if (paramScript) {
+      const decodedResult = JSON.parse(d2Decode(paramScript));
+      if (decodedResult.result !== "") {
+        initialScript = decodedResult.result;
+      } else {
+        QueryParams.del("script");
+      }
     }
+    monacoEditor.setValue(initialScript);
   }
 
-  monacoEditor.setValue(initialScript);
   monacoEditor.focus();
   provider.injectCSS();
 }
 
-function initTextArea() {
-  const editorEl = document.getElementById("editor-main");
-  editorEl.innerHTML = "<textarea id='mobile-editor'>x -> y</textarea>";
+async function switchMonaco(newTheme) {
+  if (!monacoEditor) return;
+
+  // preserve old state
+  saveMonacoState();
+
+  // Dispose old editor
+  monacoEditor.dispose();
+  await initMonaco(newTheme);
 }
 
-async function attachListeners() {
-  document.getElementById("compile-btn").addEventListener("click", compile);
+function getCurrentTheme() {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = prefersDark ? darkTheme : lightTheme;
+  return theme;
+}
+
+function saveMonacoState() {
+  monacoValue = monacoEditor.getValue();
+  monacoPosition = monacoEditor.getPosition();
 }
 
 function displayCompileErrors(errs) {

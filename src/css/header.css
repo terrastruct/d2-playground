@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  background-color: var(--steel-050);
 }
 #header-border-bottom {
   position: absolute;
@@ -31,16 +32,16 @@
   flex-direction: row;
   align-items: center;
   font-family: "Source Code Pro";
+  column-gap: 6px;
 }
 .d2-logo-img {
   width: 32px;
   height: 32px;
-  margin-right: 8px;
+  margin-right: 4px;
 }
 .d2-logo-label {
   font-family: "Source Sans Pro Bold";
   color: var(--steel-900);
-  padding-right: 8px;
 }
 #header-playground-label {
   color: var(--steel-800);
@@ -65,4 +66,20 @@
 
 .nav-menu-item:hover {
   text-decoration: underline;
+}
+
+#btn-toggle-theme {
+  background-color: transparent;
+  border-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#btn-toggle-theme > picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

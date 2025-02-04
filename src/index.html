@@ -88,6 +88,21 @@
         <a class="nav-menu-item" target="_blank" href="https://github.com/terrastruct/d2"
           >Github</a
         >
+        <button class="nav-menu-item" id="btn-toggle-theme">
+          <picture>
+            <source
+              srcset="assets/icons/moon.svg"
+              media="(prefers-color-scheme: dark)"
+              type="image/svg+xml"
+            />
+            <source
+              srcset="assets/icons/sun.svg"
+              media="(prefers-color-scheme: light)"
+              type="image/svg+xml"
+            />
+            <img src="assets/icons/sun.svg" alt="sun icon" />
+          </picture>
+        </button>
         <a
           class="nav-menu-item"
           id="download-cli"
@@ -115,9 +130,20 @@
           </div>
           <div id="hero-center-drawing">
             <picture>
-              <source srcset="assets/images/hero-center-drawing.webp" type="image/webp" />
+              <source
+                srcset="assets/images/hero-center-drawing-dark.webp"
+                media="(prefers-color-scheme: dark)"
+                class="hero-center-drawing-img"
+                type="image/webp"
+              />
+              <source
+                srcset="assets/images/hero-center-drawing.webp"
+                media="(prefers-color-scheme: light)"
+                class="hero-center-drawing-img"
+                type="image/webp"
+              />
               <img
-                id="hero-center-drawing-img"
+                class="hero-center-drawing-img"
                 loading="lazy"
                 src="assets/images/hero-center-drawing.png"
               />
@@ -310,20 +336,22 @@
         <div id="code-snippets-header">Syntax snippets</div>
         <div id="code-snippets-container">
           <!-- populated by JS -->
+        </div>
+        <picture>
+          <source
+            srcset="assets/images/shape-friends.webp"
+            type="image/webp"
+            class="shape-friends-img"
+          />
+          <img
+            loading="lazy"
+            src="assets/images/shape-friends.png"
+            class="shape-friends-img"
+          />
+        </picture>
+      </div>
     </div>
-    <div id="footer">
-      <picture>
-        <source
-          srcset="assets/images/shape-friends.webp"
-          type="image/webp"
-          id="shape-friends-img"
-        />
-        <img
-          loading="lazy"
-          src="assets/images/shape-friends.png"
-          id="shape-friends-img"
-        />
-      </picture>
+    <div id="footer" class="theme-dark">
       <div id="footer-top">
         <div id="footer-logo">
           <img src="assets/icons/d2-logo.svg" class="d2-logo-img" />
@@ -345,7 +373,10 @@
         <div class="footer-bottom-content">
           Created by
           <a href="https://terrastruct.com">
-            <img src="assets/images/terrastruct-wordmark-logo.svg" id="footer-logo" />
+            <img
+              id="footer-wordmark-logo"
+              src="assets/images/terrastruct-wordmark-logo.svg"
+            />
           </a>
         </div>
         <div class="footer-vertical-divider">|</div>

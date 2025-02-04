@@ -13,20 +13,117 @@
 
 @import "./responsive.css";
 
-:root {
+.theme-not-preferred,
+.theme-light {
+  --media-prefers-light: ;
+}
+.theme-preferred,
+.theme-dark {
+  --media-prefers-light: initial;
+}
+@media (prefers-color-scheme: light) {
+  :root:not(.theme-dark):not(.theme-not-preferred),
+  .theme-preferred {
+    --media-prefers-light: ;
+  }
+  .theme-not-preferred {
+    --media-prefers-light: initial;
+  }
+}
+
+:root,
+.theme-preferred,
+.theme-not-preferred,
+.theme-light,
+.theme-dark {
+  /* Light theme */
+  /* const maybe_light_val = lightTog && YourLightValue: */
+  --steel_light_000: var(--media-prefers-light) #ffffff;
+  --steel_light_050: var(--media-prefers-light) #f8f8f8;
+  --steel_light_100: var(--media-prefers-light) #eef1f6;
+  --steel_light_200: var(--media-prefers-light) #dee1eb;
+  --steel_light_300: var(--media-prefers-light) #c8cbd9;
+  --steel_light_400: var(--media-prefers-light) #a7acbd;
+  --steel_light_550: var(--media-prefers-light) #6d7284;
+  --steel_light_800: var(--media-prefers-light) #2e3346;
+  --steel_light_850: var(--media-prefers-light) #1c2132;
+  --steel_light_900: var(--media-prefers-light) #0a0f25;
+
+  /* From ./src/js/d2-vscode/themes/light-color-theme.json */
+  /* TODO: is there a way to import JSON into CSS file? */
+  --snippet_fg_light: var(--media-prefers-light) #0a0f25;
+  --snippet_bg_light: var(--media-prefers-light) #ffffff;
+  --snippet_punc_light: var(--media-prefers-light) #8d56e6;
+  --snippet_str_light: var(--media-prefers-light) #008847;
+  --snippet_escape_light: var(--media-prefers-light) #055625;
+  --snippet_keys_light: var(--media-prefers-light) #0d32b2;
+  --snippet_keyword_light: var(--media-prefers-light) #d91c9a;
+  --snippet_non_str_light: var(--media-prefers-light) #0b8484;
+  --snippet_cmt_light: var(--media-prefers-light) #6d7284;
+
+  --clipboard_icon_filter_light: var(--media-prefers-light) none;
+  --btn_primary_fg_light: var(--media-prefers-light) var(--blue-600);
+  --btn_primary_icon_filter_light: var(--media-prefers-light) none;
+  --sketch_mobile_bg_light: var(--media-prefers-light) var(--blue-050);
+  --sketch_mobile_fg_filter_light: var(--media-prefers-light) var(--blue-600-filter);
+  --clickable_icon_filter_light: var(--media-prefers-light) none;
+  --modal_close_icon_filter_light: var(--media-prefers-light) none;
+  --theme_scheme: var(--media-prefers-light) light;
+
+  /* Dark theme */
+  /* const theme-var = maybe_light_val || YourDarkValue: */
+  --steel-000: var(--steel_light_000, #0a0f25);
+  --steel-050: var(--steel_light_050, #1c2132);
+  --steel-100: var(--steel_light_100, #2e3346);
+  --steel-200: var(--steel_light_200, #6d7284);
+  --steel-300: var(--steel_light_300, #a7acbd);
+  --steel-400: var(--steel_light_400, #c8cbd9);
+  --steel-550: var(--steel_light_550, #dee1eb);
+  --steel-800: var(--steel_light_800, #eef1f6);
+  --steel-850: var(--steel_light_850, #f8f8f8);
+  --steel-900: var(--steel_light_900, #ffffff);
+
+  /* From ./src/js/d2-vscode/themes/dark-color-theme.json */
+  --snippet-fg: var(--snippet_fg_light, #eef1f6);
+  --snippet-bg: var(--snippet_bg_light, #0a0f25);
+  --snippet-keys: var(--snippet_keys_light, #7ca1ff);
+  --snippet-str: var(--snippet_str_light, #30c174);
+  --snippet-escape: var(--snippet_escape_light, #398741);
+  --snippet-punc: var(--snippet_punc_light, #d0b3ff);
+  --snippet-keyword: var(--snippet_keyword_light, #9b6cff);
+  --snippet-non-str: var(--snippet_str_light, #dc5cff);
+  --snippet-cmt: var(--snippet_cmt_light, #7d8295);
+
+  --clipboard-icon-filter: var(
+    --clipboard_icon_filter_light,
+    invert(67%) sepia(12%) saturate(1615%) hue-rotate(198deg) brightness(103%)
+      contrast(101%)
+  );
+
+  --btn-primary-fg: var(--btn_primary_fg_light, var(--blue-300));
+  --btn-primary-icon-filter: var(
+    --btn_primary_icon_filter_light,
+    invert(67%) sepia(12%) saturate(1615%) hue-rotate(198deg) brightness(103%)
+      contrast(101%)
+  );
+  --sketch-mobile-bg: var(--sketch_mobile_bg_light, initial);
+  --sketch-mobile-fg-filter: var(
+    --sketch_mobile_fg_filter_light,
+    invert(67%) sepia(15%) saturate(1391%) hue-rotate(198deg) brightness(103%)
+      contrast(96%)
+  );
+  --clickable-icon-filter: var(
+    --clickable_icon_filter_light,
+    invert(71%) sepia(13%) saturate(274%) hue-rotate(191deg) brightness(89%) contrast(87%)
+  );
+  --modal-close-icon-filter: var(
+    --modal_close_icon_filter_light,
+    invert(95%) sepia(4%) saturate(979%) hue-rotate(190deg) brightness(103%) contrast(96%)
+  );
+
+  /* independent */
   --shadow-md: 1px 1px 8px rgba(31, 36, 58, 0.1);
   --shadow-lg: 0px 0px 16px rgba(31, 36, 58, 0.1);
-
-  --steel-000: #ffffff;
-  --steel-050: #f8f8f8;
-  --steel-100: #eef1f6;
-  --steel-200: #dee1eb;
-  --steel-300: #c8cbd9;
-  --steel-400: #a7acbd;
-  --steel-550: #6d7284;
-  --steel-800: #2e3346;
-  --steel-850: #1c2132;
-  --steel-900: #0a0f25;
 
   --blue-025: #f7f8fe;
   --blue-050: #ecf0fd;
@@ -38,6 +135,7 @@
   --blue-600: #234cda;
   --blue-600-filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(3335%)
     hue-rotate(227deg) brightness(88%) contrast(94%);
+
   --alert-100: #ffcfd8;
   --alert-200: #ff8096;
   --alert-300: #f35471;
@@ -90,14 +188,19 @@ body {
   margin: 0;
   position: relative;
   font-family: "Source Sans Pro";
+  background-color: var(--steel-000);
 }
 
 #body {
   position: relative;
   overflow-x: hidden;
+  background-color: var(--steel-050);
 }
 
 #container {
   position: relative;
-  margin: 24px 2rem;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  background-color: var(--steel-050);
 }
