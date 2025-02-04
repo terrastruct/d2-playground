@@ -255,8 +255,8 @@ async function compile() {
     script += "\n";
   }
 
-  const encodeResult = JSON.parse(d2Encode(script));
-  if (encodeResult.result == "") {
+  const encodeResult = JSON.parse(d2.encode(script));
+  if (encodeResult.data?.result == "") {
     Alert.show(
       `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
         script
@@ -265,30 +265,34 @@ async function compile() {
     );
     return;
   }
-  const encoded = encodeResult.result;
+  const encoded = encodeResult.data.result;
   const urlEncoded = encodeURIComponent(window.location.href);
 
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
 
-  const compiled = d2Compile(script);
+  const fs = { fs: { index: script } };
+
+  const compiled = d2.compile(JSON.stringify(fs));
   if (compiled) {
     let parsed = JSON.parse(compiled);
-    if (parsed.result != "") {
-      script = parsed.result;
+    if (parsed.data) {
+      script = parsed.data.fs["index"];
       setScript(script);
-    } else if (parsed.userError != "") {
-      parsed = JSON.parse(parsed.userError);
-      displayCompileErrors(parsed.errs);
-      unlockCompileBtn();
-      return;
-    } else if (parsed.d2Error != "") {
-      unlockCompileBtn();
-      Alert.show(
-        `D2 encountered a compile error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
-        6000
-      );
-      return;
+    } else if (parsed.error) {
+      if (parsed.error.code === 400) {
+        parsed = JSON.parse(parsed.error.message);
+        displayCompileErrors(parsed);
+        unlockCompileBtn();
+        return;
+      } else {
+        unlockCompileBtn();
+        Alert.show(
+          `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+          6000
+        );
+        return;
+      }
     }
   }
   clearCompileErrors();
