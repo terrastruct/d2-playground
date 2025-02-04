@@ -31,8 +31,13 @@
   align-items: center;
   font-family: "Source Code Pro";
 }
-#footer-logo > .logo-d2-label {
-  color: var(--steel-000);
+#footer-logo > .d2-logo-label {
+  color: var(--steel-900);
+}
+#footer-wordmark-logo {
+  height: 20px;
+  margin-left: 4px;
+  display: block; /* Remove whitespace below image */
 }
 #footer-playground-label {
   color: var(--steel-300);

@@ -37,7 +37,7 @@
   height: 32px;
   margin-right: 8px;
 }
-.logo-d2-label {
+.d2-logo-label {
   font-family: "Source Sans Pro Bold";
   color: var(--steel-900);
   padding-right: 8px;
@@ -45,7 +45,9 @@
 #header-playground-label {
   color: var(--steel-800);
 }
-
+#header-d2-version {
+  color: var(--steel-550);
+}
 #nav-menu {
   display: flex;
   align-items: center;

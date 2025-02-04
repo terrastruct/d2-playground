@@ -73,8 +73,11 @@
     <div id="header">
       <div id="header-logo">
         <img src="assets/icons/d2-logo.svg" class="d2-logo-img" />
-        <span class="logo-d2-label">D2</span>
+        <span class="d2-logo-label">D2</span>
         <span id="header-playground-label">Playground</span>
+        <span id="header-d2-version">
+          <!-- populated by JS -->
+        </span>
       </div>
       <div id="nav-menu">
         <a class="nav-menu-item" href="https://discord.gg/NF6X8K4eDq">Discord</a>
@@ -124,7 +127,7 @@
                 An online runner to play, learn, and create with D2, the modern diagram
                 scripting language that turns text to diagrams.
               </div>
-              <div id="hero-text-version"></div>
+              <!-- <div id="hero-text-version"></div> -->
             </div>
           </div>
           <div id="hero-right-drawing">
@@ -178,8 +181,12 @@
                 </button>
               </div>
             </div>
-            <div id="editor-main" class="workstation-main"></div>
-            <div id="editor-errors" style="display: none"></div>
+            <div id="editor-main" class="workstation-main">
+              <!-- populated by JS -->
+            </div>
+            <div id="editor-errors" style="display: none">
+              <!-- populated by JS -->
+            </div>
           </div>
 
           <div id="workstation-divider"></div>
@@ -301,8 +308,8 @@
           </div>
         </div>
         <div id="code-snippets-header">Syntax snippets</div>
-        <div id="code-snippets-container"></div>
-      </div>
+        <div id="code-snippets-container">
+          <!-- populated by JS -->
     </div>
     <div id="footer">
       <picture>
@@ -320,10 +327,11 @@
       <div id="footer-top">
         <div id="footer-logo">
           <img src="assets/icons/d2-logo.svg" class="d2-logo-img" />
-          <span class="logo-d2-label">D2</span>
+          <span class="d2-logo-label">D2</span>
           <span id="footer-playground-label">Playground</span>
         </div>
         <div id="footer-top-icons">
+          <!-- TODO: Discord link expired, update new link -->
           <a href="https://discord.gg/NF6X8K4eDq">
             <img src="assets/icons/discord.svg" />
           </a>
@@ -341,7 +349,7 @@
           </a>
         </div>
         <div class="footer-vertical-divider">|</div>
-        <div class="footer-bottom-content">&copy; 2024 Terrastruct, Inc.</div>
+        <div class="footer-bottom-content">&copy; 2025 Terrastruct, Inc.</div>
       </div>
     </div>
     <script src="js/vendor/panzoom.js"></script>
