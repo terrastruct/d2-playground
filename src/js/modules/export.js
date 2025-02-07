@@ -49,7 +49,7 @@ async function exportPNG() {
     Alert.show(`Compile a diagram to export`, 4000);
     return;
   }
-  const svgEl = document.getElementById("d2-svg");
+  const svgEl = document.getElementById("diagram");
 
   const viewBox = svgEl.getAttribute("viewBox").split(" ");
   const width = parseFloat(viewBox[2]) * window.devicePixelRatio;
