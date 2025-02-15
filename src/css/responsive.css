@@ -34,9 +34,9 @@
     margin-top: 2px;
   }
   .sketch-mobile-activated {
-    background: var(--blue-050);
+    background: var(--sketch-mobile-bg);
     #sketch-mobile-icon {
-      filter: var(--blue-600-filter);
+      filter: var(--sketch-mobile-fg-filter);
     }
   }
   #download-cli {
@@ -58,7 +58,7 @@
     flex-direction: column;
   }
 
-  #shape-friends-img {
+  .shape-friends-img {
     bottom: 130px;
   }
 
