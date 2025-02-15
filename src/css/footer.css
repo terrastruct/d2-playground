@@ -3,12 +3,18 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  padding: 48px 40px;
   background-color: var(--steel-000);
-
+  padding: 48px 40px;
   display: flex;
   flex-direction: column;
   font-family: "Source Sans Pro";
+}
+.shape-friends-img {
+  position: absolute;
+  height: 254px;
+  width: 254px;
+  bottom: 93px;
+  left: calc(50vw - 160px);
 }
 #footer-top {
   color: var(--steel-000);

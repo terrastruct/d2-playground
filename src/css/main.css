@@ -195,6 +195,7 @@ body {
   position: relative;
   overflow-x: hidden;
   background-color: var(--steel-050);
+  padding-bottom: 80px;
 }
 
 #container {

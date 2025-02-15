@@ -137,9 +137,9 @@ async function initMonaco(theme) {
     let initialScript = "x -> y";
     const paramScript = QueryParams.get("script");
     if (paramScript) {
-      const decodedResult = JSON.parse(d2Decode(paramScript));
-      if (decodedResult.result !== "") {
-        initialScript = decodedResult.result;
+      const decodedResult = JSON.parse(d2.decode(paramScript));
+      if (decodedResult.data?.result !== "") {
+        initialScript = decodedResult.data.result;
       } else {
         QueryParams.del("script");
       }
