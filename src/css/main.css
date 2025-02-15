@@ -60,6 +60,7 @@
   --snippet_keyword_light: var(--media-prefers-light) #d91c9a;
   --snippet_non_str_light: var(--media-prefers-light) #0b8484;
   --snippet_cmt_light: var(--media-prefers-light) #6d7284;
+  --snippet_outer_light: var(--media-prefers-light) var(--steel-000);
 
   --clipboard_icon_filter_light: var(--media-prefers-light) none;
   --btn_primary_fg_light: var(--media-prefers-light) var(--blue-600);
@@ -93,6 +94,7 @@
   --snippet-keyword: var(--snippet_keyword_light, #9b6cff);
   --snippet-non-str: var(--snippet_str_light, #dc5cff);
   --snippet-cmt: var(--snippet_cmt_light, #7d8295);
+  --snippet-outer: var(--snippet_outer_light, var(--steel-100));
 
   --clipboard-icon-filter: var(
     --clipboard_icon_filter_light,

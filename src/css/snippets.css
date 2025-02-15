@@ -17,7 +17,7 @@
   padding: 16px var(--code-snippet-card-padding) var(--code-snippet-card-padding)
     var(--code-snippet-card-padding);
   border: 1px solid var(--steel-200);
-  background-color: var(--steel-100);
+  background-color: var(--snippet-outer);
   margin-bottom: 24px;
 }
 
