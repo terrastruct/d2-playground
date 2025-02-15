@@ -30,9 +30,6 @@ async function init() {
   WebTheme.init();
   const toggleThemeBtn = document.getElementById("btn-toggle-theme");
   toggleThemeBtn.addEventListener("click", async (e) => {
-    // debug
-    // console.log("Theme changed!");
-
     WebTheme.toggleTheme();
 
     const theme =
