@@ -2,6 +2,7 @@
 import Editor from "./modules/editor.js";
 import "./vendor/wasm_exec_go122.js";
 
+import WebTheme from "./modules/web_theme.js";
 import Export from "./modules/export.js";
 import Fullscreen from "./modules/fullscreen.js";
 import Theme from "./modules/theme.js";
@@ -16,9 +17,10 @@ import Sketch from "./modules/sketch.js";
 })();
 
 async function init() {
+  WebTheme.init();
   await initD2();
   // TODO should this go after the rest?
-  Editor.init();
+  await Editor.init();
   Sketch.init();
   Export.init();
   Fullscreen.init();
