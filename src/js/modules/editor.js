@@ -26,23 +26,10 @@ let monacoPosition;
 let diagramSVG;
 
 async function init() {
-  // init theme btn
-  WebTheme.init();
   const toggleThemeBtn = document.getElementById("btn-toggle-theme");
   toggleThemeBtn.addEventListener("click", async (e) => {
     WebTheme.toggleTheme();
-
-    const theme =
-      localStorage.getItem("theme") === "light"
-        ? lightTheme
-        : localStorage.getItem("theme") === "dark"
-        ? darkTheme
-        : (() => {
-            throw new Error(
-              `Invalid "theme" value in Local Storage: ${localStorage.getItem("theme")}`
-            );
-          })();
-    await switchMonaco(theme);
+    await switchMonaco(getCurrentTheme());
   });
 
   if (useMonaco()) {
@@ -160,9 +147,16 @@ async function switchMonaco(newTheme) {
 }
 
 function getCurrentTheme() {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = prefersDark ? darkTheme : lightTheme;
-  return theme;
+  const webTheme = WebTheme.getCurrentTheme();
+  const editorTheme =
+    webTheme === "light"
+      ? lightTheme
+      : webTheme === "dark"
+      ? darkTheme
+      : (() => {
+          throw new Error(`Invalid web theme: ${webTheme}`);
+        })();
+  return editorTheme;
 }
 
 function saveMonacoState() {

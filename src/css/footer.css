@@ -56,7 +56,7 @@
 #footer-divider {
   height: 1px;
   width: 100%;
-  background-color: var(--steel-800);
+  background-color: var(--steel-100);
 }
 #footer-bottom {
   margin-top: 32px;

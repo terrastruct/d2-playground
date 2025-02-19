@@ -16,13 +16,21 @@ function getSystemTheme() {
 }
 
 /**
+ * Gets the current theme from localStorage or falls back to system theme.
+ * @returns {string} The current theme value
+ */
+function getCurrentTheme() {
+  return localStorage.getItem("theme") || getSystemTheme();
+}
+
+/**
  * Toggles between light and dark theme in local storage.
  * If no theme is set in local storage, gets system theme as default.
  * If current theme is light, sets it to dark and vice versa.
  * @returns {void}
  */
 function toggleSavedTheme() {
-  const theme = localStorage.getItem("theme") || getSystemTheme();
+  const theme = getCurrentTheme();
 
   // Sets the stored value as the opposite
   localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
@@ -133,4 +141,5 @@ export default {
   init,
   toggleTheme,
   removeTheme,
+  getCurrentTheme,
 };

@@ -12,8 +12,7 @@
 }
 
 #hero-text {
-  /* make version more visible */
-  /* margin-top: 12px; */
+  margin-top: 12px;
   color: var(--steel-850);
   text-align: center;
 }
@@ -46,7 +45,6 @@
 }
 .hero-center-drawing-img {
   width: 100%;
-  margin-bottom: 0.4rem;
 }
 
 #hero-left-drawing-img {
@@ -86,8 +84,8 @@
   height: 100vh;
 
   background-size: 20px 20px;
-  background-image: linear-gradient(to right, var(--blue-050) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--blue-050) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--grid-fadeout) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-fadeout) 1px, transparent 1px);
 
   -webkit-mask-image: linear-gradient(to top, transparent 10%, black);
   -moz-mask-image: linear-gradient(to top, transparent 10%, black);
