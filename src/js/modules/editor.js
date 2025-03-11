@@ -204,7 +204,16 @@ async function compile() {
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
 
-  const fs = { fs: { index: script } };
+  const fs = {
+    fs: { index: script },
+    options: {
+      forceAppendix: false,
+      target: "",
+      animateInterval: 0,
+      salt: "",
+      noXMLTag: false
+    }
+  };
 
   const compiled = d2.compile(JSON.stringify(fs));
   if (compiled) {
