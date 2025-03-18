@@ -228,12 +228,17 @@ async function compile() {
         unlockCompileBtn();
         return;
       } else {
-        unlockCompileBtn();
-        Alert.show(
-          `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
-          6000
-        );
-        return;
+        // Temporarily disabled.
+        // Currently d2 playground calls directly into WASM, but the elk layout expects a precompute step from the js path
+        // Remove this when we switch to using js
+        if (parsed.error.message !== "failed to ELK layout: key \"elkResult\" not found in global scope") {
+          unlockCompileBtn();
+          Alert.show(
+            `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+            6000
+          );
+          return;
+        }
       }
     }
   }
