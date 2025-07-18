@@ -5,7 +5,7 @@
 // I have a build in d2-docs that produces the HTML in this format, and then just copy paste here.
 const snippets = [
   {
-    name: "Hello World",
+    name: "Hello world",
     script: `hello -> world`,
     code: `<pre class="code-snippet-code"><span><span style="color: var(--snippet-keys); background-color: var(--snippet-bg); font-style: normal;">hello </span><span style="color: var(--snippet-punc); background-color: var(--snippet-bg); font-style: normal;">-&gt;</span><span style="color: var(--snippet-fg); background-color: var(--snippet-bg); font-style: normal;"> </span><span style="color: var(--snippet-keys); background-color: var(--snippet-bg); font-style: normal;">world</span></span><br></pre>`,
   },
