@@ -55,7 +55,7 @@ async function exportPNG() {
     Alert.show(`Compile a diagram to export`, 4000);
     return;
   }
-  const svgEl = document.querySelector("#diagram #d2-svg");
+  const svgEl = document.querySelector(".d2-svg");
   if (!svgEl) {
     Alert.show(`No diagram found to export`, 4000);
     return;
@@ -136,7 +136,7 @@ async function exportPNGClipboard() {
     return;
   }
 
-  const svgEl = document.querySelector("#diagram #d2-svg");
+  const svgEl = document.querySelector(".d2-svg");
   if (!svgEl) {
     Alert.show(`No diagram found to export`, 4000);
     return;
