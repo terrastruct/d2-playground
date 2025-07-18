@@ -1,0 +1,41 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types:
+      - completed
+    branches: [master]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-go@v3
+        with:
+          go-version-file: ./go.mod
+          cache: true
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y brotli
+          npm install -g esbuild
+          go install github.com/tdewolff/minify/v2/cmd/minify@latest
+      - name: Deploy to production
+        run: ./ci/deploy.sh
+        env:
+          PLAYGROUND_CLOUDFRONT_ID: ${{ secrets.PLAYGROUND_CLOUDFRONT_ID }}
+          PLAYGROUND_S3_BUCKET: ${{ secrets.PLAYGROUND_S3_BUCKET }}
