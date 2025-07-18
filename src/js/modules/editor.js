@@ -1,7 +1,10 @@
 import lightTheme from "../d2-vscode/themes/light-color-theme.json";
+import darkTheme from "../d2-vscode/themes/dark-color-theme.json";
+
 import * as monaco from "monaco-editor";
 import { getLanguageProvider } from "../monaco/index.ts";
 
+import WebTheme from "./web_theme.js";
 import Theme from "./theme.js";
 import Layout from "./layout.js";
 import Sketch from "./sketch.js";
@@ -19,8 +22,24 @@ let monacoLineDecorators = [];
 let diagramSVG;
 
 async function init() {
+  const toggleThemeBtn = document.getElementById("btn-toggle-theme");
+  toggleThemeBtn.addEventListener("click", async (e) => {
+    WebTheme.toggleTheme();
+    await switchMonaco(getCurrentTheme());
+  });
+
   if (useMonaco()) {
-    await initMonaco();
+    await initMonaco(getCurrentTheme());
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", async (e) => {
+        // when "theme" is set, system color theme is overriden
+        if (!localStorage.getItem("theme")) {
+          const newTheme = e.matches ? darkTheme : lightTheme;
+          await switchMonaco(newTheme);
+        }
+      });
   } else {
     initTextArea();
   }
@@ -29,23 +48,31 @@ async function init() {
   compile();
 }
 
-async function initMonaco() {
+async function initMonaco(theme) {
   const editorEl = document.getElementById("editor-main");
-  const provider = await getLanguageProvider(lightTheme);
-
-  monaco.editor.defineTheme("Light", {
-    base: "vs",
+  const provider = await getLanguageProvider(theme);
+  const monacoTheme = {
+    base:
+      theme.type === "light"
+        ? "vs"
+        : theme.type === "dark"
+        ? "vs-dark"
+        : (() => {
+            throw new Error(`Invalid theme type: ${theme.type}`);
+          })(),
     inherit: true,
-    colors: lightTheme.colors,
     rules: [],
-  });
-  lightTheme.settings = lightTheme.tokenColors;
+    colors: theme.colors,
+  };
+
+  monaco.editor.defineTheme(String(theme.name).replace(/ /g, "-"), monacoTheme);
+  theme.settings = theme.tokenColors;
 
   monacoEditor = monaco.editor.create(editorEl, {
     language: "d2",
     automaticLayout: true,
     contextmenu: true,
-    theme: lightTheme,
+    theme: theme,
     tabSize: 2,
     autoIndent: "full",
     minimap: {
@@ -78,8 +105,8 @@ async function initMonaco() {
   );
   monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, compile);
   monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, compile);
-  provider.registry.setTheme(lightTheme);
-  monaco.editor.setTheme(lightTheme);
+  provider.registry.setTheme(theme);
+  monaco.editor.setTheme(String(theme.name).replace(/ /g, "-"));
 
   let initialScript = "x -> y";
   const paramScript = QueryParams.get("script");
@@ -91,10 +118,40 @@ async function initMonaco() {
       QueryParams.del("script");
     }
   }
-
   monacoEditor.setValue(initialScript);
+
   monacoEditor.focus();
   provider.injectCSS();
+}
+
+async function switchMonaco(newTheme) {
+  if (!monacoEditor) return;
+
+  const currentValue = monacoEditor.getValue();
+  const currentPosition = monacoEditor.getPosition();
+
+  // Dispose old editor
+  monacoEditor.dispose();
+  await initMonaco(newTheme);
+
+  // Restore content
+  monacoEditor.setValue(currentValue);
+  if (currentPosition) {
+    monacoEditor.setPosition(currentPosition);
+  }
+}
+
+function getCurrentTheme() {
+  const webTheme = WebTheme.getCurrentTheme();
+  const editorTheme =
+    webTheme === "light"
+      ? lightTheme
+      : webTheme === "dark"
+      ? darkTheme
+      : (() => {
+          throw new Error(`Invalid web theme: ${webTheme}`);
+        })();
+  return editorTheme;
 }
 
 function initTextArea() {
@@ -211,8 +268,8 @@ async function compile() {
       target: "",
       animateInterval: 0,
       salt: "",
-      noXMLTag: false
-    }
+      noXMLTag: false,
+    },
   };
 
   const compiled = d2.compile(JSON.stringify(fs));
@@ -231,7 +288,10 @@ async function compile() {
         // Temporarily disabled.
         // Currently d2 playground calls directly into WASM, but the elk layout expects a precompute step from the js path
         // Remove this when we switch to using js
-        if (parsed.error.message !== "failed to ELK layout: key \"elkResult\" not found in global scope") {
+        if (
+          parsed.error.message !==
+          'failed to ELK layout: key "elkResult" not found in global scope'
+        ) {
           unlockCompileBtn();
           Alert.show(
             `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,

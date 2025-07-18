@@ -3,8 +3,7 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background: var(--steel-900);
-  margin-top: 80px;
+  background-color: var(--steel-000);
   padding: 48px 40px;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
   position: absolute;
   height: 254px;
   width: 254px;
-  bottom: 93px;
+  bottom: 98px;
   left: calc(50vw - 160px);
 }
 #footer-top {
@@ -26,16 +25,21 @@
   margin-bottom: 32px;
 }
 #footer-logo {
+  font-family: "Source Code Pro";
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: "Source Code Pro";
 }
 #footer-logo > .logo-d2-label {
-  color: var(--steel-000);
+  color: var(--steel-900);
+}
+#footer-wordmark-logo {
+  height: 20px;
+  margin-left: 4px;
+  display: block; /* Remove whitespace below image */
 }
 #footer-playground-label {
-  color: var(--steel-300);
+  color: var(--steel-800);
 }
 #discord-icon {
   margin-right: 8px;
@@ -47,7 +51,7 @@
 #footer-divider {
   height: 1px;
   width: 100%;
-  background-color: var(--steel-800);
+  background-color: var(--steel-100);
 }
 #footer-bottom {
   margin-top: 32px;
@@ -60,14 +64,10 @@
 .footer-bottom-content {
   display: flex;
   align-items: center;
-}
-#footer-logo {
-  width: 95px;
-  height: 20px;
-  margin-left: 8px;
+  color: var(--steel-900);
 }
 .footer-vertical-divider {
   width: 4px;
   height: 18px;
-  color: var(--steel-000);
+  color: white;
 }

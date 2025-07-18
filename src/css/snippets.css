@@ -7,6 +7,7 @@
   font-family: "Source Sans Pro Medium";
   font-size: 24px;
   margin: 32px 0;
+  color: var(--steel-850);
 }
 
 .code-snippet-card {
@@ -16,16 +17,18 @@
   padding: 16px var(--code-snippet-card-padding) var(--code-snippet-card-padding)
     var(--code-snippet-card-padding);
   border: 1px solid var(--steel-200);
-  background-color: var(--steel-000);
+  background-color: var(--snippet-outer);
   margin-bottom: 24px;
 }
 
 .code-snippet-card-title {
+  color: var(--steel-850);
   position: relative;
   width: 100%;
   text-align: center;
-  font-family: "Source Sans Pro";
   font-size: 16px;
+  font-family: "Source Sans Pro";
+  font-weight: var(--snippet-title-weight);
   margin-bottom: 12px;
 }
 
@@ -53,7 +56,7 @@
 
 .code-snippet-code {
   overflow-x: auto;
-  background-color: #f8f8fb;
+  background-color: var(--snippet-bg);
   white-space: pre-wrap;
   padding: 12px;
   font-size: 12px;
@@ -108,6 +111,10 @@
   color: var(--steel-000);
   font-size: 12px;
   text-align: center;
+}
+
+.clipboard-icon {
+  filter: var(--clipboard-icon-filter);
 }
 
 .arrow {

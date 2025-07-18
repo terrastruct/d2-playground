@@ -85,6 +85,21 @@
         <a class="nav-menu-item" target="_blank" href="https://github.com/terrastruct/d2"
           >Github</a
         >
+        <button class="nav-menu-item" id="btn-toggle-theme">
+          <picture>
+            <source
+              srcset="assets/icons/moon.svg"
+              media="(prefers-color-scheme: dark)"
+              type="image/svg+xml"
+            />
+            <source
+              srcset="assets/icons/sun.svg"
+              media="(prefers-color-scheme: light)"
+              type="image/svg+xml"
+            />
+            <img src="assets/icons/sun.svg" alt="sun icon" />
+          </picture>
+        </button>
         <a
           class="nav-menu-item"
           id="download-cli"
@@ -112,7 +127,18 @@
           </div>
           <div id="hero-center-drawing">
             <picture>
-              <source srcset="assets/images/hero-center-drawing.webp" type="image/webp" />
+              <source
+                srcset="assets/images/hero-center-drawing-dark.webp"
+                media="(prefers-color-scheme: dark)"
+                class="hero-center-drawing-img"
+                type="image/webp"
+              />
+              <source
+                srcset="assets/images/hero-center-drawing.webp"
+                media="(prefers-color-scheme: light)"
+                class="hero-center-drawing-img"
+                type="image/webp"
+              />
               <img
                 id="hero-center-drawing-img"
                 loading="lazy"
@@ -124,7 +150,9 @@
                 An online runner to play, learn, and create with D2, the modern diagram
                 scripting language that turns text to diagrams.
               </div>
-              <div id="hero-text-version"></div>
+              <div id="hero-text-version">
+                <!-- populated by JS -->
+              </div>
             </div>
           </div>
           <div id="hero-right-drawing">
@@ -178,8 +206,12 @@
                 </button>
               </div>
             </div>
-            <div id="editor-main" class="workstation-main"></div>
-            <div id="editor-errors" style="display: none"></div>
+            <div id="editor-main" class="workstation-main">
+              <!-- populated by JS -->
+            </div>
+            <div id="editor-errors" style="display: none">
+              <!-- populated by JS -->
+            </div>
           </div>
 
           <div id="workstation-divider"></div>
@@ -301,10 +333,12 @@
           </div>
         </div>
         <div id="code-snippets-header">Syntax snippets</div>
-        <div id="code-snippets-container"></div>
+        <div id="code-snippets-container">
+          <!-- populated by JS -->
+        </div>
       </div>
     </div>
-    <div id="footer">
+    <div id="footer" class="theme-dark">
       <picture>
         <source
           srcset="assets/images/shape-friends.webp"
@@ -324,6 +358,7 @@
           <span id="footer-playground-label">Playground</span>
         </div>
         <div id="footer-top-icons">
+          <!-- TODO: Discord link expired, update new link -->
           <a href="https://discord.gg/NF6X8K4eDq">
             <img src="assets/icons/discord.svg" />
           </a>
@@ -337,11 +372,14 @@
         <div class="footer-bottom-content">
           Created by
           <a href="https://terrastruct.com">
-            <img src="assets/images/terrastruct-wordmark-logo.svg" id="footer-logo" />
+            <img
+              id="footer-wordmark-logo"
+              src="assets/images/terrastruct-wordmark-logo.svg"
+            />
           </a>
         </div>
         <div class="footer-vertical-divider">|</div>
-        <div class="footer-bottom-content">&copy; 2024 Terrastruct, Inc.</div>
+        <div class="footer-bottom-content">&copy; 2025 Terrastruct, Inc.</div>
       </div>
     </div>
     <script src="js/vendor/panzoom.js"></script>
