@@ -56,7 +56,7 @@
 .toggle-inner:after {
   text-transform: uppercase;
   padding-right: 1rem;
-  background-color: var(--steel-400);
+  background-color: var(--steel-200);
   color: white;
   text-align: right;
   content: "";
