@@ -33,7 +33,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y brotli
           npm install -g esbuild
-          go install github.com/tdewolff/minify/v2/cmd/minify@latest
+          go install github.com/tdewolff/minify/v2/cmd/minify@v2.20.37
       - name: Deploy to production
         run: ./ci/deploy.sh
         env:
