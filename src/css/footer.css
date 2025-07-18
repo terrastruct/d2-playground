@@ -9,11 +9,11 @@
   flex-direction: column;
   font-family: "Source Sans Pro";
 }
-.shape-friends-img {
+#shape-friends-img {
   position: absolute;
   height: 254px;
   width: 254px;
-  bottom: 93px;
+  bottom: 98px;
   left: calc(50vw - 160px);
 }
 #footer-top {
@@ -26,14 +26,9 @@
 }
 #footer-logo {
   font-family: "Source Code Pro";
-  width: 95px;
-  height: 20px;
-  margin-left: 8px;
-
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 6px;
 }
 #footer-logo > .logo-d2-label {
   color: var(--steel-900);
@@ -74,5 +69,5 @@
 .footer-vertical-divider {
   width: 4px;
   height: 18px;
-  color: var(--steel-000);
+  color: white;
 }

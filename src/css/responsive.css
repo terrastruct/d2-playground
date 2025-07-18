@@ -58,8 +58,8 @@
     flex-direction: column;
   }
 
-  .shape-friends-img {
-    bottom: 130px;
+  #shape-friends-img {
+    bottom: 134px;
   }
 
   #modal-container {
