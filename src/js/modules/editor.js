@@ -133,7 +133,7 @@ async function switchMonaco(newTheme) {
   // Dispose old editor
   monacoEditor.dispose();
   await initMonaco(newTheme);
-  
+
   // Restore content
   monacoEditor.setValue(currentValue);
   if (currentPosition) {
@@ -162,7 +162,6 @@ function initTextArea() {
 async function attachListeners() {
   document.getElementById("compile-btn").addEventListener("click", compile);
 }
-
 
 function displayCompileErrors(errs) {
   if (monacoEditor) {
@@ -269,8 +268,8 @@ async function compile() {
       target: "",
       animateInterval: 0,
       salt: "",
-      noXMLTag: false
-    }
+      noXMLTag: false,
+    },
   };
 
   const compiled = d2.compile(JSON.stringify(fs));
@@ -289,7 +288,10 @@ async function compile() {
         // Temporarily disabled.
         // Currently d2 playground calls directly into WASM, but the elk layout expects a precompute step from the js path
         // Remove this when we switch to using js
-        if (parsed.error.message !== "failed to ELK layout: key \"elkResult\" not found in global scope") {
+        if (
+          parsed.error.message !==
+          'failed to ELK layout: key "elkResult" not found in global scope'
+        ) {
           unlockCompileBtn();
           Alert.show(
             `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
