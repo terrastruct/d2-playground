@@ -51,7 +51,7 @@
 
   /* From ./src/js/d2-vscode/themes/light-color-theme.json */
   --snippet_fg_light: var(--media-prefers-light) #0a0f25;
-  --snippet_bg_light: var(--media-prefers-light) #ffffff;
+  --snippet_bg_light: var(--media-prefers-light) #f8f8fb;
   --snippet_punc_light: var(--media-prefers-light) #8d56e6;
   --snippet_str_light: var(--media-prefers-light) #008847;
   --snippet_escape_light: var(--media-prefers-light) #055625;

@@ -56,7 +56,7 @@
 
 .code-snippet-code {
   overflow-x: auto;
-  background-color: var(--steel-000);
+  background-color: var(--snippet-bg);
   white-space: pre-wrap;
   padding: 12px;
   font-size: 12px;
