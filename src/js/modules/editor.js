@@ -19,10 +19,6 @@ const MAX_ERRORS = 5;
 let monacoEditor;
 let monacoLineDecorators = [];
 
-// preserve state
-let monacoValue;
-let monacoPosition;
-
 let diagramSVG;
 
 async function init() {
@@ -45,12 +41,10 @@ async function init() {
         }
       });
   } else {
-    // init text area
-    const editorEl = document.getElementById("editor-main");
-    editorEl.innerHTML = "<textarea id='mobile-editor'>x -> y</textarea>";
+    initTextArea();
   }
 
-  document.getElementById("compile-btn").addEventListener("click", compile);
+  attachListeners();
   compile();
 }
 
@@ -114,22 +108,17 @@ async function initMonaco(theme) {
   provider.registry.setTheme(theme);
   monaco.editor.setTheme(String(theme.name).replace(/ /g, "-"));
 
-  if (monacoValue || monacoPosition) {
-    monacoEditor.setValue(monacoValue);
-    monacoEditor.setPosition(monacoPosition);
-  } else {
-    let initialScript = "x -> y";
-    const paramScript = QueryParams.get("script");
-    if (paramScript) {
-      const decodedResult = JSON.parse(d2.decode(paramScript));
-      if (decodedResult.data?.result !== "") {
-        initialScript = decodedResult.data.result;
-      } else {
-        QueryParams.del("script");
-      }
+  let initialScript = "x -> y";
+  const paramScript = QueryParams.get("script");
+  if (paramScript) {
+    const decodedResult = JSON.parse(d2.decode(paramScript));
+    if (decodedResult.data?.result !== "") {
+      initialScript = decodedResult.data.result;
+    } else {
+      QueryParams.del("script");
     }
-    monacoEditor.setValue(initialScript);
   }
+  monacoEditor.setValue(initialScript);
 
   monacoEditor.focus();
   provider.injectCSS();
@@ -138,12 +127,18 @@ async function initMonaco(theme) {
 async function switchMonaco(newTheme) {
   if (!monacoEditor) return;
 
-  // preserve old state
-  saveMonacoState();
+  const currentValue = monacoEditor.getValue();
+  const currentPosition = monacoEditor.getPosition();
 
   // Dispose old editor
   monacoEditor.dispose();
   await initMonaco(newTheme);
+  
+  // Restore content
+  monacoEditor.setValue(currentValue);
+  if (currentPosition) {
+    monacoEditor.setPosition(currentPosition);
+  }
 }
 
 function getCurrentTheme() {
@@ -159,10 +154,15 @@ function getCurrentTheme() {
   return editorTheme;
 }
 
-function saveMonacoState() {
-  monacoValue = monacoEditor.getValue();
-  monacoPosition = monacoEditor.getPosition();
+function initTextArea() {
+  const editorEl = document.getElementById("editor-main");
+  editorEl.innerHTML = "<textarea id='mobile-editor'>x -> y</textarea>";
 }
+
+async function attachListeners() {
+  document.getElementById("compile-btn").addEventListener("click", compile);
+}
+
 
 function displayCompileErrors(errs) {
   if (monacoEditor) {
