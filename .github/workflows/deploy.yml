@@ -33,6 +33,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y brotli minify
           npm install -g esbuild
+      - name: Install JavaScript dependencies
+        run: |
+          cd src/js
+          yarn install
       - name: Deploy to production
         run: ./ci/deploy.sh
         env:
