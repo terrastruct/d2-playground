@@ -3,14 +3,13 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background: var(--steel-900);
-  margin-top: 80px;
+  background-color: var(--steel-000);
   padding: 48px 40px;
   display: flex;
   flex-direction: column;
   font-family: "Source Sans Pro";
 }
-#shape-friends-img {
+.shape-friends-img {
   position: absolute;
   height: 254px;
   width: 254px;
@@ -26,16 +25,26 @@
   margin-bottom: 32px;
 }
 #footer-logo {
+  font-family: "Source Code Pro";
+  width: 95px;
+  height: 20px;
+  margin-left: 8px;
+
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: "Source Code Pro";
+  column-gap: 6px;
 }
-#footer-logo > .logo-d2-label {
-  color: var(--steel-000);
+#footer-logo > .d2-logo-label {
+  color: var(--steel-900);
+}
+#footer-wordmark-logo {
+  height: 20px;
+  margin-left: 4px;
+  display: block; /* Remove whitespace below image */
 }
 #footer-playground-label {
-  color: var(--steel-300);
+  color: var(--steel-800);
 }
 #discord-icon {
   margin-right: 8px;
@@ -47,7 +56,7 @@
 #footer-divider {
   height: 1px;
   width: 100%;
-  background-color: var(--steel-800);
+  background-color: var(--steel-100);
 }
 #footer-bottom {
   margin-top: 32px;
@@ -60,11 +69,7 @@
 .footer-bottom-content {
   display: flex;
   align-items: center;
-}
-#footer-logo {
-  width: 95px;
-  height: 20px;
-  margin-left: 8px;
+  color: var(--steel-900);
 }
 .footer-vertical-divider {
   width: 4px;
