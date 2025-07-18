@@ -32,16 +32,16 @@
   flex-direction: row;
   align-items: center;
   font-family: "Source Code Pro";
-  column-gap: 6px;
 }
 .d2-logo-img {
   width: 32px;
   height: 32px;
-  margin-right: 4px;
+  margin-right: 8px;
 }
-.d2-logo-label {
+.logo-d2-label {
   font-family: "Source Sans Pro Bold";
   color: var(--steel-900);
+  padding-right: 8px;
 }
 #header-playground-label {
   color: var(--steel-800);

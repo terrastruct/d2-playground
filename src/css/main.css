@@ -72,6 +72,7 @@
   --clickable_icon_filter_light: var(--media-prefers-light) none;
   --modal_close_icon_filter_light: var(--media-prefers-light) none;
   --theme_scheme: var(--media-prefers-light) light;
+  --body_bg_light: var(--media-prefers-light) var(--blue-025);
 
   /* Dark theme */
   /* const theme-var = maybe_light_val || YourDarkValue: */
@@ -127,6 +128,7 @@
     --modal_close_icon_filter_light,
     invert(95%) sepia(4%) saturate(979%) hue-rotate(190deg) brightness(103%) contrast(96%)
   );
+  --body-bg: var(--body_bg_light, var(--steel-050));
 
   /* independent */
   --shadow-md: 1px 1px 8px rgba(31, 36, 58, 0.1);
@@ -286,13 +288,12 @@ body {
   margin: 0;
   position: relative;
   font-family: "Source Sans Pro";
-  background-color: var(--steel-000);
 }
 
 #body {
   position: relative;
   overflow-x: hidden;
-  background-color: var(--steel-050);
+  background-color: var(--body-bg);
   padding-bottom: 80px;
   z-index: 0;
 }
@@ -300,5 +301,4 @@ body {
 #container {
   position: relative;
   margin: 24px 2rem;
-  background-color: var(--steel-050);
 }

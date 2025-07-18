@@ -35,7 +35,7 @@
   align-items: center;
   column-gap: 6px;
 }
-#footer-logo > .d2-logo-label {
+#footer-logo > .logo-d2-label {
   color: var(--steel-900);
 }
 #footer-wordmark-logo {
