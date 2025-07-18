@@ -31,9 +31,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y brotli
+          sudo apt-get install -y brotli minify
           npm install -g esbuild
-          go install github.com/tdewolff/minify/v2/cmd/minify@latest
       - name: Deploy to production
         run: ./ci/deploy.sh
         env:
