@@ -26,6 +26,16 @@
   border: 1px solid var(--alert-300);
 }
 
+#notification.notification-success {
+  background: #d1fae5;
+  border: 1px solid #6ee7b7;
+}
+
+#notification.notification-success #notification-icon {
+  filter: invert(32%) sepia(85%) saturate(588%) hue-rotate(123deg) brightness(98%)
+    contrast(90%);
+}
+
 #notification.notification-inactive {
   box-shadow: none;
   top: -3.5rem;
