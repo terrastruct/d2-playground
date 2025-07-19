@@ -85,7 +85,9 @@ async function exportPNG() {
     img = await loadImage();
   } catch (e) {
     Alert.show(
-      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
+        window.location.href
+      )}">Github</a>.`,
       4000
     );
     return;
@@ -167,7 +169,9 @@ async function exportPNGClipboard() {
     img = await loadImage();
   } catch (e) {
     Alert.show(
-      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
+        window.location.href
+      )}">Github</a>.`,
       4000
     );
     return;
