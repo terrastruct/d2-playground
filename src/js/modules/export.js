@@ -7,7 +7,7 @@ function init() {
   document.getElementById("export-menu").addEventListener("mouseleave", hideMenu);
   document.getElementById("export-menu-png").addEventListener("click", exportPNG);
   document.getElementById("export-menu-svg").addEventListener("click", exportSVG);
-  
+
   // Hide clipboard options on mobile devices
   if (Mobile.is()) {
     document.getElementById("export-menu-png-clipboard").style.display = "none";
