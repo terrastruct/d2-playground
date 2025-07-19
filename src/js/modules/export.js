@@ -47,20 +47,12 @@ function exportSVG() {
 
   const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
-  
-  if (Mobile.is()) {
-    // On mobile, open SVG in new tab for user to save
-    window.open(url, '_blank');
-    Alert.show('Long press the image to save it to your device', 4000);
-  } else {
-    // On desktop, use download
-    const dl = document.createElement("a");
-    dl.href = url;
-    dl.download = "d2.svg";
-    document.body.appendChild(dl);
-    dl.click();
-    document.body.removeChild(dl);
-  }
+  const dl = document.createElement("a");
+  dl.href = url;
+  dl.download = "d2.svg";
+  document.body.appendChild(dl);
+  dl.click();
+  document.body.removeChild(dl);
 }
 
 async function exportPNG() {
@@ -115,43 +107,12 @@ async function exportPNG() {
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   const pngData = canvas.toDataURL("image/png");
 
-  if (Mobile.is()) {
-    // On mobile, try Web Share API first, then fallback to direct download
-    canvas.toBlob(async (blob) => {
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], "d2.png", { type: "image/png" })] })) {
-        try {
-          const file = new File([blob], "d2.png", { type: "image/png" });
-          await navigator.share({
-            title: 'D2 Diagram',
-            text: 'D2 diagram export',
-            files: [file]
-          });
-          return;
-        } catch (e) {
-          // If sharing fails, fall through to download
-        }
-      }
-      
-      // Fallback: try direct download on mobile
-      const url = URL.createObjectURL(blob);
-      const dl = document.createElement("a");
-      dl.href = url;
-      dl.download = "d2.png";
-      dl.style.display = "none";
-      document.body.appendChild(dl);
-      dl.click();
-      document.body.removeChild(dl);
-      URL.revokeObjectURL(url);
-    }, "image/png");
-  } else {
-    // On desktop, use download
-    const dl = document.createElement("a");
-    dl.href = pngData;
-    dl.download = "d2.png";
-    document.body.appendChild(dl);
-    dl.click();
-    document.body.removeChild(dl);
-  }
+  const dl = document.createElement("a");
+  dl.href = pngData;
+  dl.download = "d2.png";
+  document.body.appendChild(dl);
+  dl.click();
+  document.body.removeChild(dl);
 }
 
 async function exportSVGClipboard() {
