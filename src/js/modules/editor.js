@@ -247,7 +247,6 @@ async function compile() {
 
   const encodeResult = JSON.parse(d2.encode(script));
   const urlEncoded = encodeURIComponent(window.location.href);
-  console.log(urlEncoded);
 
   if (encodeResult.data?.result == "") {
     Alert.show(
