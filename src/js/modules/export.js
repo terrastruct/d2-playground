@@ -1,17 +1,25 @@
 import Alert from "./alert.js";
 import Editor from "./editor.js";
+import Mobile from "../lib/mobile.js";
 
 function init() {
   document.getElementById("export-btn").addEventListener("click", toggleMenu);
   document.getElementById("export-menu").addEventListener("mouseleave", hideMenu);
   document.getElementById("export-menu-png").addEventListener("click", exportPNG);
   document.getElementById("export-menu-svg").addEventListener("click", exportSVG);
-  document
-    .getElementById("export-menu-png-clipboard")
-    .addEventListener("click", exportPNGClipboard);
-  document
-    .getElementById("export-menu-svg-clipboard")
-    .addEventListener("click", exportSVGClipboard);
+
+  // Hide clipboard options on mobile devices
+  if (Mobile.is()) {
+    document.getElementById("export-menu-png-clipboard").style.display = "none";
+    document.getElementById("export-menu-svg-clipboard").style.display = "none";
+  } else {
+    document
+      .getElementById("export-menu-png-clipboard")
+      .addEventListener("click", exportPNGClipboard);
+    document
+      .getElementById("export-menu-svg-clipboard")
+      .addEventListener("click", exportSVGClipboard);
+  }
 }
 
 function toggleMenu() {
@@ -85,7 +93,9 @@ async function exportPNG() {
     img = await loadImage();
   } catch (e) {
     Alert.show(
-      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
+        window.location.href
+      )}">Github</a>.`,
       4000
     );
     return;
@@ -167,7 +177,9 @@ async function exportPNGClipboard() {
     img = await loadImage();
   } catch (e) {
     Alert.show(
-      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new">Github</a>.`,
+      `Converting to PNG failed: ${e}. Please help improve D2 by sharing this link on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${encodeURIComponent(
+        window.location.href
+      )}">Github</a>.`,
       4000
     );
     return;

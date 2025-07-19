@@ -34,6 +34,9 @@ async function init() {
   versionDOM.innerHTML = `d2 version: ${version.data}`;
 
   // TODO defer load hero images all the way here
+
+  // Make Editor available globally for snippets
+  window.D2Editor = Editor;
 }
 
 async function initD2() {

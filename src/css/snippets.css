@@ -67,6 +67,10 @@
   visibility: visible;
 }
 
+.code-snippet-card-content:hover > .code-snippet-card-play-button {
+  visibility: visible;
+}
+
 .code-snippet-card-clipboard-button {
   visibility: hidden;
   display: flex;
@@ -126,4 +130,54 @@
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid var(--steel-900);
+}
+
+.code-snippet-card-play-button {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--blue-300);
+  border-radius: var(--border-radius);
+  position: absolute;
+  right: 48px;
+  top: 8px;
+  background-color: var(--steel-000);
+  box-shadow: 1px 1px 8px 0px #1f243a1a;
+  cursor: pointer;
+}
+
+.code-snippet-card-play-button:hover {
+  background-color: var(--steel-100);
+}
+
+.code-snippet-card-play-button:hover > .play-tooltip {
+  visibility: visible;
+}
+
+.code-snippet-card-play-button:hover > .arrow {
+  visibility: visible;
+}
+
+.play-tooltip {
+  position: absolute;
+  top: -41px;
+  white-space: nowrap;
+  background: var(--steel-900);
+  border-radius: 2px;
+  padding: 6px 8px 6px 8px;
+  visibility: hidden;
+}
+
+.play-tooltip > span {
+  color: var(--steel-000);
+  font-size: 12px;
+  text-align: center;
+}
+
+.play-icon {
+  filter: var(--clipboard-icon-filter);
 }
