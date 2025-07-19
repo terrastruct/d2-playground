@@ -306,6 +306,13 @@ function stitch() {
     <img src="assets/icons/clipboard.svg" class="clipboard-icon"/>
     <div class="arrow"></div>
   </div>
+  <div class="code-snippet-card-play-button">
+    <div class="play-tooltip">
+      <span class="play-tooltip-text">Run in editor</span>
+    </div>
+    <img src="assets/icons/play.svg" class="play-icon"/>
+    <div class="arrow"></div>
+  </div>
   ${snippet.code}
   </div>
 </div>`;
@@ -318,6 +325,7 @@ function init() {
   document.getElementById("code-snippets-container").innerHTML = stitched;
 
   attachClipboardListener();
+  attachPlayListener();
 
   // pure css masonry layouts don't exist, have to do bullshit like this
   arrangeSnippetCards();
@@ -359,6 +367,17 @@ async function copyCode(block) {
   await navigator.clipboard.writeText(code);
 }
 
+async function runCodeInEditor(block) {
+  const code = block.querySelector("pre").innerText;
+  if (window.D2Editor) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const editor = window.D2Editor.getEditor();
+    editor.setValue(code);
+    editor.revealLine(1);
+    window.D2Editor.compile();
+  }
+}
+
 function attachClipboardListener() {
   const codeSnippetsClipboardButtonEls = document.getElementsByClassName(
     "code-snippet-card-clipboard-button"
@@ -378,6 +397,27 @@ function attachClipboardListener() {
           "assets/icons/clipboard.svg";
         clipboardButtonEl.querySelector(".clipboard-tooltip-text").textContent =
           "Copy to clipboard";
+      }, 2000);
+    });
+  }
+}
+
+function attachPlayListener() {
+  const codeSnippetsPlayButtonEls = document.getElementsByClassName(
+    "code-snippet-card-play-button"
+  );
+  for (const playButtonEl of codeSnippetsPlayButtonEls) {
+    playButtonEl.addEventListener("click", () => {
+      runCodeInEditor(playButtonEl.parentElement);
+
+      // show played UI
+      playButtonEl.querySelector(".play-icon").src = "assets/icons/checkcircle.svg";
+      playButtonEl.querySelector(".play-tooltip-text").textContent = "Loaded";
+
+      // restore original UI
+      setTimeout(() => {
+        playButtonEl.querySelector(".play-icon").src = "assets/icons/play.svg";
+        playButtonEl.querySelector(".play-tooltip-text").textContent = "Run in editor";
       }, 2000);
     });
   }
