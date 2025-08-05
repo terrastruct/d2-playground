@@ -102,12 +102,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ffe8ec;
+  background: var(--error-panel-bg);
 }
 .editor-errors-line {
   box-sizing: border-box;
   margin: 8px;
-  color: var(--steel-800);
+  color: var(--error-panel-text);
   font-family: "Source Code Pro";
   font-size: 12px;
 }

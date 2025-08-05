@@ -247,7 +247,6 @@ async function compile() {
 
   const encodeResult = JSON.parse(d2.encode(script));
   const urlEncoded = encodeURIComponent(window.location.href);
-
   if (encodeResult.data?.result == "") {
     Alert.show(
       `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,

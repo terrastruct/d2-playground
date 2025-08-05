@@ -73,6 +73,11 @@
   --modal_close_icon_filter_light: var(--media-prefers-light) none;
   --theme_scheme: var(--media-prefers-light) light;
   --body_bg_light: var(--media-prefers-light) var(--blue-025);
+  --error_gutter_bg_light: var(--media-prefers-light) #ffb9c5;
+  --error_gutter_number_light: var(--media-prefers-light) #99001c;
+  --error_panel_bg_light: var(--media-prefers-light) #ffe8ec;
+  --error_panel_text_light: var(--media-prefers-light) #2e3346;
+  --notification_text_light: var(--media-prefers-light) #2e3346;
 
   /* Dark theme */
   /* const theme-var = maybe_light_val || YourDarkValue: */
@@ -129,6 +134,11 @@
     invert(95%) sepia(4%) saturate(979%) hue-rotate(190deg) brightness(103%) contrast(96%)
   );
   --body-bg: var(--body_bg_light, var(--steel-050));
+  --error-gutter-bg: var(--error_gutter_bg_light, #4a2027);
+  --error-gutter-number: var(--error_gutter_number_light, #ff6b7d);
+  --error-panel-bg: var(--error_panel_bg_light, #3a1f24);
+  --error-panel-text: var(--error_panel_text_light, #ffb9c5);
+  --notification-text: var(--notification_text_light, #0a0f25);
 
   /* independent */
   --shadow-md: 1px 1px 8px rgba(31, 36, 58, 0.1);

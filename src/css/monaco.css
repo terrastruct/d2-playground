@@ -1,11 +1,11 @@
 /* Monaco customization */
 
 .ErrorLineGutter {
-  background: #ffb9c5;
+  background: var(--error-gutter-bg);
 }
 
 .ErrorLineGutter + .line-numbers {
-  color: #99001c !important;
+  color: var(--error-gutter-number) !important;
 }
 
 .line-numbers:not(.active-line-number) {
