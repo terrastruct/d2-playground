@@ -55,7 +55,7 @@ Contributions are welcome!
 1. Run `git submodule update --init --recursive` to pull the submodules (D2's VSCode plugin
    for syntax highlighting, and our CI library).
 1. Go to `src/js` and run `yarn` to get the Node modules.
-1. Run `go run main.go` and open `http://localhost:9090`.
+1. Run `./ci/dev.sh` to start the development server. It will automatically find an available port starting from 9090.
 
 ## Dependencies
 
