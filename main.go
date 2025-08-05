@@ -18,36 +18,36 @@ import (
 )
 
 var (
-	port string
-	jsErrors atomic.Int32
+	port      string
+	jsErrors  atomic.Int32
 	cssErrors atomic.Int32
 )
 
 var (
 	logger = log.New(os.Stderr)
-	
+
 	headerStyle = lipgloss.NewStyle().
-		Bold(true).
-		Foreground(lipgloss.Color("#7D56F4")).
-		PaddingTop(1).
-		PaddingBottom(1)
-	
+			Bold(true).
+			Foreground(lipgloss.Color("#7D56F4")).
+			PaddingTop(1).
+			PaddingBottom(1)
+
 	urlStyle = lipgloss.NewStyle().
-		Bold(true).
-		Foreground(lipgloss.Color("#00E396")).
-		Underline(true)
-	
+			Bold(true).
+			Foreground(lipgloss.Color("#00E396")).
+			Underline(true)
+
 	successStyle = lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#00E396"))
-	
+			Foreground(lipgloss.Color("#00E396"))
+
 	errorStyle = lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#FF6B6B")).
-		Bold(true)
-	
+			Foreground(lipgloss.Color("#FF6B6B")).
+			Bold(true)
+
 	boxStyle = lipgloss.NewStyle().
-		Border(lipgloss.RoundedBorder()).
-		BorderForeground(lipgloss.Color("#7D56F4")).
-		Padding(1, 2)
+			Border(lipgloss.RoundedBorder()).
+			BorderForeground(lipgloss.Color("#7D56F4")).
+			Padding(1, 2)
 )
 
 func getAvailablePort() string {
@@ -78,15 +78,15 @@ func clearTerminal() {
 
 func main() {
 	clearTerminal()
-	
+
 	logger.SetReportCaller(false)
 	logger.SetLevel(log.DebugLevel)
-	
+
 	header := headerStyle.Render("🚀 D2 Playground Dev Server")
 	fmt.Println(header)
-	
+
 	port = getAvailablePort()
-	
+
 	logger.Info("Building JavaScript bundle...")
 	result := api.Build(api.BuildOptions{
 		EntryPoints: []string{"./src/js/main.js"},
@@ -155,27 +155,27 @@ func main() {
 	logger.Info(successStyle.Render("✓ CSS bundle ready"))
 
 	url := fmt.Sprintf("http://localhost:%s", port)
-	
+
 	shortcutsStyle := lipgloss.NewStyle().
 		Foreground(lipgloss.Color("#888")).
 		Italic(true)
-	
+
 	info := boxStyle.Render(fmt.Sprintf(
 		"Server running at %s\n\n"+
-		"Watching for file changes...\n\n"+
-		"%s",
+			"Watching for file changes...\n\n"+
+			"%s",
 		urlStyle.Render(url),
 		shortcutsStyle.Render("Press Ctrl+C to stop"),
 	))
 	fmt.Println("\n" + info)
-	
+
 	go serve()
-	
+
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
-	
+
 	<-sigChan
-	
+
 	fmt.Println("\n" + headerStyle.Render("👋 Shutting down gracefully..."))
 	os.Exit(0)
 }
@@ -193,9 +193,9 @@ func loggingMiddleware(next http.Handler) http.Handler {
 		start := time.Now()
 		wrapped := &responseWriter{ResponseWriter: w, statusCode: http.StatusOK}
 		next.ServeHTTP(wrapped, r)
-		
+
 		duration := time.Since(start)
-		
+
 		logger.Debug(
 			"Request",
 			"method", r.Method,
