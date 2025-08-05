@@ -1,6 +1,6 @@
 module oss.terrastruct.com/d2-playground
 
-go 1.18
+go 1.19
 
 require (
 	github.com/charmbracelet/lipgloss v1.1.0
