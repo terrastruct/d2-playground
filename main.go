@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 
@@ -9,9 +10,22 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-var port = "9090"
+var port string
+
+func getAvailablePort() string {
+	preferredPort := 9090
+	for p := preferredPort; p < preferredPort+100; p++ {
+		listener, err := net.Listen("tcp", fmt.Sprintf(":%d", p))
+		if err == nil {
+			listener.Close()
+			return fmt.Sprintf("%d", p)
+		}
+	}
+	panic("Could not find an available port")
+}
 
 func main() {
+	port = getAvailablePort()
 	result := api.Build(api.BuildOptions{
 		EntryPoints: []string{"./src/js/main.js"},
 		Outfile:     "./src/build/out.js",
