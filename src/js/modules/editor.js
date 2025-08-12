@@ -111,10 +111,15 @@ async function initMonaco(theme) {
   let initialScript = "x -> y";
   const paramScript = QueryParams.get("script");
   if (paramScript) {
-    const decodedResult = JSON.parse(d2.decode(paramScript));
-    if (decodedResult.data?.result !== "") {
-      initialScript = decodedResult.data.result;
-    } else {
+    try {
+      const decodedResult = await window.d2.decode(paramScript);
+      if (decodedResult !== "") {
+        initialScript = decodedResult;
+      } else {
+        QueryParams.del("script");
+      }
+    } catch (err) {
+      console.error("D2: Failed to decode script from URL parameter:", err);
       QueryParams.del("script");
     }
   }
@@ -241,25 +246,38 @@ async function compile() {
 
   lockCompileBtn();
   let script = getScript();
+
   if (!script.endsWith("\n")) {
     script += "\n";
   }
 
-  const encodeResult = JSON.parse(d2.encode(script));
-  const urlEncoded = encodeURIComponent(window.location.href);
-  if (encodeResult.data?.result == "") {
+  let encoded;
+  try {
+    encoded = await window.d2.encode(script);
+    if (!encoded) {
+      const urlEncoded = encodeURIComponent(window.location.href);
+      Alert.show(
+        `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+        6000
+      );
+      unlockCompileBtn();
+      return;
+    }
+  } catch (err) {
+    console.error("D2 Compile: Encode failed", err);
+    const urlEncoded = encodeURIComponent(window.location.href);
     Alert.show(
       `D2 encountered an encoding error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
       6000
     );
+    unlockCompileBtn();
     return;
   }
-  const encoded = encodeResult.data.result;
 
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
 
-  const fs = {
+  const compileRequest = {
     fs: { index: script },
     options: {
       forceAppendix: false,
@@ -270,35 +288,31 @@ async function compile() {
     },
   };
 
-  const compiled = d2.compile(JSON.stringify(fs));
-  if (compiled) {
-    let parsed = JSON.parse(compiled);
-    if (parsed.data) {
-      script = parsed.data.fs["index"];
+  let compiled;
+  try {
+    compiled = await window.d2.compile(compileRequest);
+    if (compiled.fs && compiled.fs.index) {
+      script = compiled.fs.index;
       setScript(script);
-    } else if (parsed.error) {
-      if (parsed.error.code === 400) {
-        parsed = JSON.parse(parsed.error.message);
-        displayCompileErrors(parsed);
+    }
+  } catch (err) {
+    if (err.message && err.message.includes("compile error")) {
+      try {
+        const errorData = JSON.parse(err.message);
+        displayCompileErrors(errorData);
         unlockCompileBtn();
         return;
-      } else {
-        // Temporarily disabled.
-        // Currently d2 playground calls directly into WASM, but the elk layout expects a precompute step from the js path
-        // Remove this when we switch to using js
-        if (
-          parsed.error.message !==
-          'failed to ELK layout: key "elkResult" not found in global scope'
-        ) {
-          unlockCompileBtn();
-          Alert.show(
-            `D2 encountered a compile error: "${parsed.error.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
-            6000
-          );
-          return;
-        }
+      } catch (parseErr) {
+        // fallthrough to generic error handling
       }
     }
+    const urlEncoded = encodeURIComponent(window.location.href);
+    unlockCompileBtn();
+    Alert.show(
+      `D2 encountered a compile error: "${err.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+      6000
+    );
+    return;
   }
   clearCompileErrors();
 
@@ -358,13 +372,24 @@ async function compile() {
     }
     svg = await response.text();
   } else {
-    svg = Stubs.DUMMY_SVG;
+    const renderOptions = {
+      layout: layout,
+      themeID: Theme.getThemeID(),
+      sketch: Sketch.getValue() === "1" ? true : false,
+    };
+    try {
+      svg = await window.d2.render(compiled.diagram, renderOptions);
+    } catch (renderErr) {
+      svg = Stubs.DUMMY_SVG;
+    }
     hideLoader();
     unlockCompileBtn();
   }
+
   const renderEl = document.getElementById("render-svg");
   const containerWidth = renderEl.getBoundingClientRect().width;
   const containerHeight = renderEl.getBoundingClientRect().height;
+
   diagramSVG = svg;
   renderEl.innerHTML = svg;
 

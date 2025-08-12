@@ -1,6 +1,5 @@
-// NOTE Editor must be imported before wasm_exec.
 import Editor from "./modules/editor.js";
-import "./vendor/wasm_exec_go122.js";
+import { D2 } from "@terrastruct/d2";
 
 import WebTheme from "./modules/web_theme.js";
 import Export from "./modules/export.js";
@@ -18,9 +17,11 @@ import Sketch from "./modules/sketch.js";
 
 async function init() {
   WebTheme.init();
+  
   await initD2();
-  // TODO should this go after the rest?
+  
   await Editor.init();
+  
   Sketch.init();
   Export.init();
   Fullscreen.init();
@@ -29,9 +30,14 @@ async function init() {
   Layout.init();
   Modal.init();
 
-  const versionDOM = document.getElementById("hero-text-version");
-  const version = JSON.parse(d2.version());
-  versionDOM.innerHTML = `d2 version: ${version.data}`;
+  // Version method will be available in the next d2.js release
+  // const versionDOM = document.getElementById("hero-text-version");
+  // try {
+  //   const version = await window.d2.version();
+  //   versionDOM.innerHTML = `d2 version: ${version}`;
+  // } catch (err) {
+  //   console.warn("Could not get D2 version:", err);
+  // }
 
   // TODO defer load hero images all the way here
 
@@ -40,16 +46,12 @@ async function init() {
 }
 
 async function initD2() {
-  const go = new Go();
-  const res = await WebAssembly.instantiateStreaming(
-    fetch("../d2.wasm"),
-    go.importObject
-  );
-  const callback = new Promise((resolve) => {
-    // @ts-ignore
-    window.onWasmInitialized = resolve;
-  });
-  go.run(res.instance);
-  await callback;
+  try {
+    window.d2 = new D2();
+    await window.d2.ready;
+  } catch (err) {
+    console.error("D2: Failed to initialize D2 instance", err);
+    throw err;
+  }
   // Alert.show("9:41", 3000);
 }
