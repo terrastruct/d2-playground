@@ -50,8 +50,13 @@ async function initD2() {
   try {
     window.d2 = new D2();
     await window.d2.ready;
+    unlockCompileBtn();
   } catch (err) {
     console.error("D2: Failed to initialize D2 instance", err);
     throw err;
   }
+}
+
+function unlockCompileBtn() {
+  document.getElementById("compile-btn").classList.remove("btn-disabled");
 }
