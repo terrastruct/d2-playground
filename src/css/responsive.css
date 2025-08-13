@@ -71,6 +71,9 @@
   #hero {
     overflow: hidden;
   }
+  #hero-text {
+    margin-top: 0;
+  }
   #editor-toolbar {
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);

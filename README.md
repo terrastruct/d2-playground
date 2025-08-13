@@ -20,7 +20,9 @@
 - [FAQ](#faq)
   - [What is this written in?](#what-is-this-written-in)
   - [How does it work?](#how-does-it-work)
-  - [What's this API?](#whats-this-api)
+  - [Can I run it locally?](#can-i-run-it-locally)
+- [Development](#development)
+  - [Prerequisites](#prerequisites)
 - [Contributing](#contributing)
 - [Dependencies](#dependencies)
 
@@ -32,30 +34,27 @@ Vanilla HTML, CSS, and Javascript.
 
 ### How does it work?
 
-![Sequence diagram](./docs/assets/sequence.svg)
+[d2.js](https://www.npmjs.com/package/@terrastruct/d2) serves every request for dagre and
+elk layouts all within the frontend client. To render
+[tala](https://d2lang.com/tour/tala/) layouts, a request is made to an API (since it's not
+supported by `d2.js`.
 
-### What's this API?
+### Can I run it locally?
 
-We are working on a full WASM build of D2 that includes the layout engines, but it
-requires optimizations to get the build size down to be manageable for the web. Tracking
-here:
-[https://github.com/terrastruct/d2/pull/436/files](https://github.com/terrastruct/d2/pull/436/files).
+Yes. Just clone and follow the instructions in the Development section below.
 
-When this is ready, Playground will offer two options: a fully offline, local version
-powered by D2 WASM running on your browser, and an API version, for running on low-power
-machines. Currently, the API just takes an encoded D2 script and runs the layout engine.
-It saves no data and does nothign else.
+## Development
+
+Just run `./ci/dev.sh`.
+
+### Prerequisites
+
+- `esbuild`:
+[https://esbuild.github.io/getting-started/#install-esbuild](https://esbuild.github.io/getting-started/#install-esbuild)
 
 ## Contributing
 
 Contributions are welcome!
-
-1. Install `esbuild`:
-   [https://esbuild.github.io/getting-started/#install-esbuild](https://esbuild.github.io/getting-started/#install-esbuild)
-1. Run `git submodule update --init --recursive` to pull the submodules (D2's VSCode plugin
-   for syntax highlighting, and our CI library).
-1. Go to `src/js` and run `yarn` to get the Node modules.
-1. Run `./ci/dev.sh` to start the development server. It will automatically find an available port starting from 9090.
 
 ## Dependencies
 

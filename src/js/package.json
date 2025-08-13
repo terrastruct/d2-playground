@@ -6,6 +6,7 @@
   "author": "Terrastruct, Inc.",
   "license": "MPL 2.0",
   "dependencies": {
+    "@terrastruct/d2": "^0.1.29",
     "monaco-editor": "^0.34.1",
     "shiki": "^0.11.1",
     "vscode-oniguruma": "^1.7.0",
