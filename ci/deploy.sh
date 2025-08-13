@@ -69,13 +69,11 @@ main() {
 
   # TODO should run the compression concurrent alongside build and deploy above
   # Cloudfront does not support wasm compression, so we upload it compressed
-  bigheader "WASM"
+  bigheader "Monaco WASM"
 
   # TODO only run wasm if differs from dist. slow.
 
   brotli -c src/js/vendor/onig.wasm > dist/js/vendor/onig.wasm
-  brotli -c src/d2.wasm > dist/d2.wasm
-  aws s3 cp dist/d2.wasm ${PLAYGROUND_S3_BUCKET} --content-encoding br --content-type application/wasm
 
   bigheader "Invalidating cache"
 
