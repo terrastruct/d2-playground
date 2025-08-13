@@ -37,7 +37,7 @@ Vanilla HTML, CSS, and Javascript.
 [d2.js](https://www.npmjs.com/package/@terrastruct/d2) serves every request for dagre and
 elk layouts all within the frontend client. To render
 [tala](https://d2lang.com/tour/tala/) layouts, a request is made to an API (since it's not
-supported by `d2.js`.
+supported by `d2.js`).
 
 ### Can I run it locally?
 
@@ -45,7 +45,7 @@ Yes. Just clone and follow the instructions in the Development section below.
 
 ## Development
 
-Just run `./ci/dev.sh`.
+Run `./ci/dev.sh`.
 
 ### Prerequisites
 
