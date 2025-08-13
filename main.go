@@ -113,7 +113,7 @@ func main() {
 					jsErrors.Store(0)
 					if stat, err := os.Stat("./src/build/out.js"); err == nil {
 						sizeMB := float64(stat.Size()) / (1024 * 1024)
-						logger.Info("✨ JS recompiled", 
+						logger.Info("✨ JS recompiled",
 							"time", time.Now().Format("15:04:05"),
 							"size", fmt.Sprintf("%.1fMB", sizeMB),
 						)
@@ -130,7 +130,7 @@ func main() {
 		logger.Fatal("JS build failed", "errors", result.Errors)
 	}
 	buildDuration := time.Since(buildStart)
-	
+
 	// Get actual file size
 	if stat, err := os.Stat("./src/build/out.js"); err == nil {
 		sizeBytes := stat.Size()
@@ -169,7 +169,7 @@ func main() {
 					cssErrors.Store(0)
 					if stat, err := os.Stat("./src/build/style.css"); err == nil {
 						sizeKB := float64(stat.Size()) / 1024
-						logger.Info("✨ CSS recompiled", 
+						logger.Info("✨ CSS recompiled",
 							"time", time.Now().Format("15:04:05"),
 							"size", fmt.Sprintf("%.1fKB", sizeKB),
 						)
@@ -186,7 +186,7 @@ func main() {
 		logger.Fatal("CSS build failed", "errors", result.Errors)
 	}
 	cssBuildDuration := time.Since(cssBuildStart)
-	
+
 	// Get actual CSS file size
 	if stat, err := os.Stat("./src/build/style.css"); err == nil {
 		sizeBytes := stat.Size()
@@ -247,7 +247,7 @@ func loggingMiddleware(next http.Handler) http.Handler {
 		logLevel := "debug"
 		if r.URL.Path == "/build/out.js" {
 			logLevel = "info"
-			logger.Info("Serving D2 JavaScript bundle", 
+			logger.Info("Serving D2 JavaScript bundle",
 				"path", r.URL.Path,
 				"status", wrapped.statusCode,
 				"duration", fmt.Sprintf("%dms", duration.Milliseconds()),
