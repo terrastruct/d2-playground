@@ -1,5 +1,6 @@
 import Editor from "./modules/editor.js";
 import { D2 } from "@terrastruct/d2";
+import d2jsPackage from "../js/node_modules/@terrastruct/d2/package.json";
 
 import WebTheme from "./modules/web_theme.js";
 import Export from "./modules/export.js";
@@ -34,7 +35,7 @@ async function init() {
   const versionDOM = document.getElementById("hero-text-version");
   try {
     const version = await window.d2.version();
-    versionDOM.innerHTML = `d2 version: ${version}`;
+    versionDOM.innerHTML = `d2 version: ${version} | d2.js version: ${d2jsPackage.version}`;
   } catch (err) {
     console.warn("Could not get D2 version:", err);
   }
