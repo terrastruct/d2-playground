@@ -279,58 +279,19 @@ async function compile() {
 
   const sketch = Sketch.getValue() === "1" ? true : false;
   const layout = Layout.getLayout();
-  const compileRequest = {
-    fs: { index: script },
-    options: {
-      layout,
-      sketch,
-      forceAppendix: false,
-      target: "",
-      animateInterval: 0,
-      salt: "",
-      noXMLTag: false,
-    },
-  };
+  let svg;
 
-  let compiled;
-  try {
-    compiled = await window.d2.compile(compileRequest);
-    if (compiled.fs && compiled.fs.index) {
-      script = compiled.fs.index;
-      setScript(script);
-    }
-  } catch (err) {
-    if (err.message && err.message.includes("compile error")) {
-      try {
-        const errorData = JSON.parse(err.message);
-        displayCompileErrors(errorData);
-        unlockCompileBtn();
-        return;
-      } catch (parseErr) {
-        // fallthrough to generic error handling
-      }
-    }
-    const urlEncoded = encodeURIComponent(window.location.href);
-    unlockCompileBtn();
-    Alert.show(
-      `D2 encountered a compile error: "${err.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
-      6000
-    );
-    return;
-  }
   clearCompileErrors();
-
   showLoader();
 
-  const talaKey = Layout.getTALAKey();
+  // TALA uses remote rendering
+  if (layout === "tala") {
+    const talaKey = Layout.getTALAKey();
 
-  const headers = {};
-  if (layout == "tala" && talaKey) {
-    headers["x-tala-key"] = talaKey;
-  }
-
-  let svg;
-  if (ENV === "PRODUCTION") {
+    const headers = {};
+    if (layout == "tala" && talaKey) {
+      headers["x-tala-key"] = talaKey;
+    }
     let response;
     try {
       response = await fetch(
@@ -375,15 +336,59 @@ async function compile() {
     }
     svg = await response.text();
   } else {
+    const compileRequest = {
+      fs: { index: script },
+      options: {
+        layout,
+        sketch,
+        forceAppendix: false,
+        target: "",
+        animateInterval: 0,
+        salt: "",
+        noXMLTag: false,
+      },
+    };
+
+    let compiled;
+    try {
+      compiled = await window.d2.compile(compileRequest);
+      if (compiled.fs && compiled.fs.index) {
+        script = compiled.fs.index;
+        setScript(script);
+      }
+    } catch (err) {
+      if (err.message && err.message.includes("compile error")) {
+        try {
+          const errorData = JSON.parse(err.message);
+          displayCompileErrors(errorData);
+          unlockCompileBtn();
+          return;
+        } catch (parseErr) {
+          // fallthrough to generic error handling
+        }
+      }
+      const urlEncoded = encodeURIComponent(window.location.href);
+      unlockCompileBtn();
+      Alert.show(
+        `D2 encountered a compile error: "${err.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+        6000
+      );
+      return;
+    }
     const renderOptions = {
       layout: layout,
       sketch,
       themeID: Theme.getThemeID(),
+      center: true,
     };
     try {
       svg = await window.d2.render(compiled.diagram, renderOptions);
     } catch (renderErr) {
       console.error("failed to render", renderErr);
+      Alert.show(
+        `D2 encountered an unexpected error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
+        6000
+      );
     }
     hideLoader();
     unlockCompileBtn();
