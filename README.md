@@ -22,6 +22,7 @@
   - [How does it work?](#how-does-it-work)
   - [Can I run it locally?](#can-i-run-it-locally)
 - [Development](#development)
+  - [Prerequisites](#prerequisites)
 - [Contributing](#contributing)
 - [Dependencies](#dependencies)
 
@@ -44,12 +45,12 @@ Yes. Just clone and follow the instructions in the Development section below.
 
 ## Development
 
-1. Install `esbuild`:
-   [https://esbuild.github.io/getting-started/#install-esbuild](https://esbuild.github.io/getting-started/#install-esbuild)
-1. Run `git submodule update --init --recursive` to pull the submodules (D2's VSCode plugin
-   for syntax highlighting, and our CI library).
-1. Go to `src/js` and run `yarn` to get the Node modules.
-1. Run `./ci/dev.sh` to start the development server. It will automatically find an available port starting from 9090.
+Just run `./ci/dev.sh`.
+
+### Prerequisites
+
+- `esbuild`:
+[https://esbuild.github.io/getting-started/#install-esbuild](https://esbuild.github.io/getting-started/#install-esbuild)
 
 ## Contributing
 
