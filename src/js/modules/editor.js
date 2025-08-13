@@ -277,9 +277,13 @@ async function compile() {
   // set even if compilation or layout later fails. User may want to share debug session
   QueryParams.set("script", encoded);
 
+  const sketch = Sketch.getValue() === "1" ? true : false;
+  const layout = Layout.getLayout();
   const compileRequest = {
     fs: { index: script },
     options: {
+      layout,
+      sketch,
       forceAppendix: false,
       target: "",
       animateInterval: 0,
@@ -319,7 +323,6 @@ async function compile() {
   showLoader();
 
   const talaKey = Layout.getTALAKey();
-  const layout = Layout.getLayout();
 
   const headers = {};
   if (layout == "tala" && talaKey) {
@@ -374,13 +377,13 @@ async function compile() {
   } else {
     const renderOptions = {
       layout: layout,
+      sketch,
       themeID: Theme.getThemeID(),
-      sketch: Sketch.getValue() === "1" ? true : false,
     };
     try {
       svg = await window.d2.render(compiled.diagram, renderOptions);
     } catch (renderErr) {
-      svg = Stubs.DUMMY_SVG;
+      console.error("failed to render", renderErr);
     }
     hideLoader();
     unlockCompileBtn();

@@ -9,7 +9,6 @@ import Zoom from "./modules/zoom.js";
 import Layout from "./modules/layout.js";
 import Modal from "./modules/modal.js";
 import Sketch from "./modules/sketch.js";
-// import Alert from "./modules/alert.js";
 
 (async () => {
   await init();
@@ -20,14 +19,16 @@ async function init() {
 
   await initD2();
 
+  // These init before editor, they read query params and set toggles, which editor reads for first compile
+  Sketch.init();
+  Layout.init();
+  Theme.init();
+
   await Editor.init();
 
-  Sketch.init();
   Export.init();
   Fullscreen.init();
-  Theme.init();
   Zoom.init();
-  Layout.init();
   Modal.init();
 
   const versionDOM = document.getElementById("hero-text-version");
@@ -52,5 +53,4 @@ async function initD2() {
     console.error("D2: Failed to initialize D2 instance", err);
     throw err;
   }
-  // Alert.show("9:41", 3000);
 }
