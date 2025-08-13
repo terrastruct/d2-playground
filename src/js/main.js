@@ -17,11 +17,11 @@ import Sketch from "./modules/sketch.js";
 
 async function init() {
   WebTheme.init();
-  
+
   await initD2();
-  
+
   await Editor.init();
-  
+
   Sketch.init();
   Export.init();
   Fullscreen.init();
@@ -30,14 +30,13 @@ async function init() {
   Layout.init();
   Modal.init();
 
-  // Version method will be available in the next d2.js release
-  // const versionDOM = document.getElementById("hero-text-version");
-  // try {
-  //   const version = await window.d2.version();
-  //   versionDOM.innerHTML = `d2 version: ${version}`;
-  // } catch (err) {
-  //   console.warn("Could not get D2 version:", err);
-  // }
+  const versionDOM = document.getElementById("hero-text-version");
+  try {
+    const version = await window.d2.version();
+    versionDOM.innerHTML = `d2 version: ${version}`;
+  } catch (err) {
+    console.warn("Could not get D2 version:", err);
+  }
 
   // TODO defer load hero images all the way here
 

@@ -45,7 +45,7 @@ async function init() {
   }
 
   attachListeners();
-  compile();
+  await compile();
 }
 
 async function initMonaco(theme) {
