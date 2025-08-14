@@ -40,6 +40,12 @@ build() {
   # https://github.com/tdewolff/minify/tree/master/cmd/minify
   minify -o dist/index.html src/index.html
 
+  # Cloudfront only compresses up to 10mb, this is slightly above, so we pre-compress it here
+  brotli -c dist/build/out.js > dist/build/out.js.br
+  brotli -c dist/build/style.css > dist/build/style.css.br
+  mv dist/build/out.js.br dist/build/out.js
+  mv dist/build/style.css.br dist/build/style.css
+
   for f in ${copyfiles[@]}; do
     echo "copying ${f}"
     cp -R ${f} dist
@@ -65,7 +71,10 @@ main() {
 
   bigheader "Deploying"
 
-  runjob 'aws s3 sync' "aws s3 sync ./dist ${PLAYGROUND_S3_BUCKET} --delete --no-progress"
+  runjob 'aws s3 sync brotli' "aws s3 cp ./dist/build/out.js ${PLAYGROUND_S3_BUCKET}/build/out.js --content-encoding='br' --content-type='application/javascript' --metadata-directive='REPLACE' --no-progress"
+  runjob 'aws s3 sync brotli css' "aws s3 cp ./dist/build/style.css ${PLAYGROUND_S3_BUCKET}/build/style.css --content-encoding='br' --content-type='text/css' --metadata-directive='REPLACE' --no-progress"
+
+  runjob 'aws s3 sync' "aws s3 sync ./dist ${PLAYGROUND_S3_BUCKET} --delete --no-progress --exclude='build/out.js' --exclude='build/style.css'"
 
   # TODO should run the compression concurrent alongside build and deploy above
   # Cloudfront does not support wasm compression, so we upload it compressed
