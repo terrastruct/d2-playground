@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@terrastruct/d2@^0.1.29":
-  version "0.1.29"
-  resolved "https://registry.yarnpkg.com/@terrastruct/d2/-/d2-0.1.29.tgz#ceb6013438607db7cd9e5093b9df990783522509"
-  integrity sha512-9jAcYS5TNkov46aqvYoY3eKd5MHggJwXEtW9Kvg+9hO69hfPLRBSHsANlDqTM5k9lzpbRyX9cmxd2eZzNry/qQ==
+"@terrastruct/d2@^0.1.31":
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@terrastruct/d2/-/d2-0.1.31.tgz#4eec04f46078debd72e619871aa7cadd03118a8a"
+  integrity sha512-+WrfaOgG9C4TnfJX/vpk2v0RwKj4FHXiFamGPW+3zeVgTZ1YKJAQYEdgyH5i7EFP4kWgembxOOXIRBgbE3woNw==
 
 jsonc-parser@^3.0.0:
   version "3.2.0"
