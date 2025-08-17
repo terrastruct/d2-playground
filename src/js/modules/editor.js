@@ -8,6 +8,7 @@ import WebTheme from "./web_theme.js";
 import Theme from "./theme.js";
 import Layout from "./layout.js";
 import Sketch from "./sketch.js";
+import Export from "./export.js";
 import Zoom from "./zoom.js";
 import Alert from "./alert.js";
 
@@ -166,6 +167,11 @@ function initTextArea() {
 
 async function attachListeners() {
   document.getElementById("compile-btn").addEventListener("click", compile);
+
+  // Set up tooltip text based on OS
+  const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+  const shortcutText = isMac ? "Cmd+S" : "Ctrl+S";
+  document.querySelector(".compile-tooltip-text").textContent = shortcutText;
 }
 
 function displayCompileErrors(errs) {
@@ -278,6 +284,7 @@ async function compile() {
   QueryParams.set("script", encoded);
 
   const sketch = Sketch.getValue() === "1" ? true : false;
+  const ascii = Sketch.getASCII();
   const layout = Layout.getLayout();
   let svg;
 
@@ -294,13 +301,17 @@ async function compile() {
     }
     let response;
     try {
-      response = await fetch(
-        `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}&sketch=${Sketch.getValue()}`,
-        {
-          headers,
-          method: "GET",
-        }
-      );
+      let apiUrl = `https://api.d2lang.com/render/svg?script=${encoded}&layout=${layout}&theme=${Theme.getThemeID()}`;
+      if (ascii) {
+        apiUrl += `&ascii=1`;
+      }
+      if (sketch) {
+        apiUrl += `&sketch=1`;
+      }
+      response = await fetch(apiUrl, {
+        headers,
+        method: "GET",
+      });
     } catch (e) {
       // 4-500s do not throw
       Alert.show(
@@ -340,7 +351,8 @@ async function compile() {
       fs: { index: script },
       options: {
         layout,
-        sketch,
+        sketch: ascii ? false : sketch,
+        ascii,
         forceAppendix: false,
         target: "",
         animateInterval: 0,
@@ -377,7 +389,8 @@ async function compile() {
     }
     const renderOptions = {
       layout: layout,
-      sketch,
+      sketch: ascii ? false : sketch,
+      ascii,
       themeID: Theme.getThemeID(),
       center: true,
     };
@@ -399,17 +412,23 @@ async function compile() {
   const containerHeight = renderEl.getBoundingClientRect().height;
 
   diagramSVG = svg;
-  renderEl.innerHTML = svg;
 
-  // skip over the xml version tag
-  const svgEl = renderEl.lastChild;
+  if (ascii) {
+    renderEl.innerHTML = `<pre style="font-family: monospace; white-space: pre; overflow: auto; width: 100%; height: 100%; user-select: text; cursor: text; -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text;">${svg}</pre>`;
+  } else {
+    renderEl.innerHTML = svg;
 
-  svgEl.id = "diagram";
-  Zoom.attach();
+    // skip over the xml version tag
+    const svgEl = renderEl.lastChild;
 
-  svgEl.setAttribute("width", `${containerWidth}px`);
-  svgEl.setAttribute("height", `${containerHeight}px`);
+    svgEl.id = "diagram";
+    Zoom.attach();
+
+    svgEl.setAttribute("width", `${containerWidth}px`);
+    svgEl.setAttribute("height", `${containerHeight}px`);
+  }
   unlockCompileBtn();
+  Export.updateExportButton();
 }
 
 function parseRange(rs) {

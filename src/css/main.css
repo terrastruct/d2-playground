@@ -67,8 +67,6 @@
   --clipboard_icon_filter_light: var(--media-prefers-light) none;
   --btn_primary_fg_light: var(--media-prefers-light) var(--blue-600);
   --btn_primary_icon_filter_light: var(--media-prefers-light) none;
-  --sketch_mobile_bg_light: var(--media-prefers-light) var(--blue-050);
-  --sketch_mobile_fg_filter_light: var(--media-prefers-light) var(--blue-600-filter);
   --clickable_icon_filter_light: var(--media-prefers-light) none;
   --modal_close_icon_filter_light: var(--media-prefers-light) none;
   --theme_scheme: var(--media-prefers-light) light;
@@ -118,12 +116,6 @@
     --btn_primary_icon_filter_light,
     invert(67%) sepia(12%) saturate(1615%) hue-rotate(198deg) brightness(103%)
       contrast(101%)
-  );
-  --sketch-mobile-bg: var(--sketch_mobile_bg_light, initial);
-  --sketch-mobile-fg-filter: var(
-    --sketch_mobile_fg_filter_light,
-    invert(67%) sepia(15%) saturate(1391%) hue-rotate(198deg) brightness(103%)
-      contrast(96%)
   );
   --clickable-icon-filter: var(
     --clickable_icon_filter_light,

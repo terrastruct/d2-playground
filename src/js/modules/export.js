@@ -1,9 +1,10 @@
 import Alert from "./alert.js";
 import Editor from "./editor.js";
+import Sketch from "./sketch.js";
 import Mobile from "../lib/mobile.js";
 
 function init() {
-  document.getElementById("export-btn").addEventListener("click", toggleMenu);
+  document.getElementById("export-btn").addEventListener("click", handleExportClick);
   document.getElementById("export-menu").addEventListener("mouseleave", hideMenu);
   document.getElementById("export-menu-png").addEventListener("click", exportPNG);
   document.getElementById("export-menu-svg").addEventListener("click", exportSVG);
@@ -19,6 +20,30 @@ function init() {
     document
       .getElementById("export-menu-svg-clipboard")
       .addEventListener("click", exportSVGClipboard);
+  }
+}
+
+function handleExportClick() {
+  if (Sketch.getASCII()) {
+    copyASCII();
+  } else {
+    toggleMenu();
+  }
+}
+
+function updateExportButton() {
+  const exportBtn = document.getElementById("export-btn");
+  const exportMenu = document.getElementById("export-menu");
+
+  if (!exportBtn || !exportMenu) {
+    return;
+  }
+
+  if (Sketch.getASCII()) {
+    exportBtn.textContent = "Copy";
+    exportMenu.style.display = "none";
+  } else {
+    exportBtn.innerHTML = 'Export<img src="assets/icons/down.svg" class="btn-icon" />';
   }
 }
 
@@ -201,6 +226,22 @@ async function exportPNGClipboard() {
   }, "image/png");
 }
 
+async function copyASCII() {
+  const ascii = Editor.getDiagramSVG();
+  if (ascii == "") {
+    Alert.show(`Compile a diagram to copy`, 4000);
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(ascii);
+    Alert.show(`Copied to clipboard`, 2000, "success");
+  } catch (e) {
+    Alert.show(`Failed to copy to clipboard: ${e}`, 4000);
+  }
+}
+
 export default {
   init,
+  updateExportButton,
 };

@@ -140,11 +140,6 @@
   color: var(--steel-800);
 }
 
-#sketch-mobile-icon {
-  filter: invert(46%) sepia(11%) saturate(523%) hue-rotate(192deg) brightness(94%)
-    contrast(88%);
-}
-
 #key {
   width: 20px;
 }
