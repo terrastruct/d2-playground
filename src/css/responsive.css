@@ -23,22 +23,6 @@
   #sketch {
     display: none;
   }
-  #sketch-mobile {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.4rem;
-    border-radius: 4px;
-  }
-  #sketch-mobile-icon {
-    margin-top: 2px;
-  }
-  .sketch-mobile-activated {
-    background: var(--sketch-mobile-bg);
-    #sketch-mobile-icon {
-      filter: var(--sketch-mobile-fg-filter);
-    }
-  }
   #download-cli {
     display: none;
   }

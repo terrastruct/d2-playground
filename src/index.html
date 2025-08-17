@@ -234,33 +234,15 @@
                   </div>
                 </div>
 
-                <div id="sketch">
-                  Sketch
-                  <div class="toggle">
-                    <input
-                      type="checkbox"
-                      class="toggle-checkbox"
-                      name="sketch-checkbox"
-                      id="sketch-checkbox"
-                    />
-                    <label class="toggle-label" for="sketch-checkbox">
-                      <span class="toggle-inner" />
-                      <span class="toggle-switch">
-                        <img
-                          id="sketch-toggle-icon"
-                          class="toggle-icon"
-                          src="assets/icons/toggle_x.svg"
-                        />
-                      </span>
-                    </label>
+                <div class="btn-menu-container">
+                  <button id="renderer-btn" class="btn btn-labeled">
+                    <div class="btn-label">Renderer</div>
+                    <div id="current-renderer" class="btn-value">SVG</div>
+                    <img src="assets/icons/down-grey.svg" class="btn-labeled-icon" />
+                  </button>
+                  <div id="renderer-menu" class="btn-menu" style="display: none">
+                    <!-- populated by JS -->
                   </div>
-                </div>
-                <div id="sketch-mobile" style="display: none">
-                  <img
-                    id="sketch-mobile-icon"
-                    src="assets/icons/sketch.svg"
-                    class="btn-icon"
-                  />
                 </div>
               </div>
               <div id="render-toolbar-right" class="workstation-toolbar-right">

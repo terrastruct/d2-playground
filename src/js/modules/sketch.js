@@ -1,66 +1,104 @@
 import Editor from "./editor.js";
+import Export from "./export.js";
 
 import QueryParams from "../lib/queryparams";
 
+const rendererOptions = ["SVG", "Sketch", "ASCII"];
+
 function init() {
-  readQueryParam();
-  document
-    .getElementById("sketch-checkbox")
-    .addEventListener("change", (e) => toggleSketch(e.target.checked));
-  document
-    .getElementById("sketch-mobile-icon")
-    .addEventListener("click", () => toggleSketch(QueryParams.get("sketch") === "0"));
-  updateMobileIcon(QueryParams.get("sketch") === "1");
+  readQueryParams();
+  hydrateRendererOptions();
+  addListeners();
+
+  document.getElementById("renderer-btn").addEventListener("click", toggleMenu);
+  document.getElementById("renderer-menu").addEventListener("mouseleave", hideMenu);
+
+  Export.updateExportButton();
 }
 
-function readQueryParam() {
-  const param = QueryParams.get("sketch");
-  if (param === "") {
-    return;
+function readQueryParams() {
+  const sketchParam = QueryParams.get("sketch");
+  const asciiParam = QueryParams.get("ascii");
+
+  let current = "SVG";
+
+  if (asciiParam === "1") {
+    current = "ASCII";
+  } else if (sketchParam === "1") {
+    current = "Sketch";
   }
 
-  if (param === "1") {
-    document.getElementById("sketch-checkbox").checked = true;
-    return;
-  } else if (param === "0") {
-    document.getElementById("sketch-checkbox").checked = false;
-    return;
-  } else {
-    QueryParams.del("sketch");
+  document.getElementById("current-renderer").textContent = current;
+}
+
+function hydrateRendererOptions() {
+  let itemEls = "";
+
+  for (const option of rendererOptions) {
+    itemEls += `<div class="btn-menu-item renderer-option">${option}</div>`;
+  }
+
+  document.getElementById("renderer-menu").innerHTML = itemEls;
+}
+
+function addListeners() {
+  for (const el of document.getElementsByClassName("renderer-option")) {
+    el.addEventListener("click", () => changeRenderer(el.textContent));
   }
 }
 
-function toggleSketch(on) {
-  const icon = document.getElementById("sketch-toggle-icon");
-  if (on) {
-    icon.src = "assets/icons/toggle_check.svg";
+function changeRenderer(name) {
+  document.getElementById("current-renderer").textContent = name;
+  hideMenu();
+
+  // Clear both parameters first
+  QueryParams.del("sketch");
+  QueryParams.del("ascii");
+
+  // Set the appropriate parameter
+  if (name === "Sketch") {
     QueryParams.set("sketch", "1");
-  } else {
-    icon.src = "assets/icons/toggle_x.svg";
-    QueryParams.set("sketch", "0");
+  } else if (name === "ASCII") {
+    QueryParams.set("ascii", "1");
   }
+
   if (Editor.getDiagramSVG()) {
     Editor.compile();
   }
-
-  updateMobileIcon(on);
+  Export.updateExportButton();
 }
 
-function updateMobileIcon(on) {
-  const icon = document.getElementById("sketch-mobile");
-
-  if (on) {
-    icon.classList.add("sketch-mobile-activated");
+function toggleMenu() {
+  const menu = document.getElementById("renderer-menu");
+  if (menu.style.display == "none") {
+    menu.style.display = "block";
   } else {
-    icon.classList.remove("sketch-mobile-activated");
+    menu.style.display = "none";
   }
 }
 
+function hideMenu() {
+  document.getElementById("renderer-menu").style.display = "none";
+}
+
+function getCurrentRenderer() {
+  return document.getElementById("current-renderer").textContent;
+}
+
 function getValue() {
-  return document.getElementById("sketch-checkbox").checked ? "1" : "0";
+  const current = getCurrentRenderer();
+  if (current === "Sketch") {
+    return "1";
+  }
+  return "0";
+}
+
+function getASCII() {
+  return getCurrentRenderer() === "ASCII";
 }
 
 export default {
   init,
   getValue,
+  getASCII,
 };
