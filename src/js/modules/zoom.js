@@ -103,9 +103,17 @@ function onZoomSlider(e) {
   ).style.background = `linear-gradient(to right, #6b8afb ${percentage}%, #d8dce9 ${percentage}%)`;
 }
 
+function detach() {
+  if (panzoomInstance) {
+    panzoomInstance.dispose();
+    panzoomInstance = null;
+  }
+}
+
 export default {
   init,
   attach,
+  detach,
   MIN_ZOOM,
   MAX_ZOOM,
 };
