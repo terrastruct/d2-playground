@@ -19,6 +19,7 @@
 }
 
 .btn-primary {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,4 +104,43 @@
 
 .btn-primary > .btn-icon {
   filter: var(--btn-primary-icon-filter);
+}
+
+.btn-primary:hover > .compile-tooltip {
+  visibility: visible;
+}
+
+.btn-primary:hover > .compile-arrow {
+  visibility: visible;
+}
+
+.compile-tooltip {
+  position: absolute;
+  top: -41px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--steel-900);
+  border-radius: 2px;
+  padding: 6px 8px 6px 8px;
+  visibility: hidden;
+}
+
+.compile-tooltip > span {
+  color: var(--steel-000);
+  font-size: 12px;
+  text-align: center;
+}
+
+.compile-arrow {
+  visibility: hidden;
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--steel-900);
 }

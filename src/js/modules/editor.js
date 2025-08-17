@@ -166,6 +166,11 @@ function initTextArea() {
 
 async function attachListeners() {
   document.getElementById("compile-btn").addEventListener("click", compile);
+
+  // Set up tooltip text based on OS
+  const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+  const shortcutText = isMac ? "Cmd+S" : "Ctrl+S";
+  document.querySelector(".compile-tooltip-text").textContent = shortcutText;
 }
 
 function displayCompileErrors(errs) {
