@@ -414,8 +414,19 @@ async function compile() {
   diagramSVG = svg;
 
   if (ascii) {
-    renderEl.innerHTML = `<pre style="font-family: monospace; white-space: pre; overflow: auto; width: 100%; height: 100%; user-select: text; cursor: text; -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text;">${svg}</pre>`;
+    Zoom.detach();
+    renderEl.style.userSelect = "text";
+    renderEl.style.webkitUserSelect = "text";
+    renderEl.style.mozUserSelect = "text";
+    renderEl.style.msUserSelect = "text";
+    renderEl.style.pointerEvents = "auto";
+    renderEl.innerHTML = `<pre id="ascii-output" style="font-family: monospace; white-space: pre; overflow: auto; width: 100%; height: 100%; user-select: text !important; cursor: text; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; pointer-events: auto !important; position: relative; z-index: 1;">${svg}</pre>`;
   } else {
+    renderEl.style.userSelect = "";
+    renderEl.style.webkitUserSelect = "";
+    renderEl.style.mozUserSelect = "";
+    renderEl.style.msUserSelect = "";
+    renderEl.style.pointerEvents = "";
     renderEl.innerHTML = svg;
 
     // skip over the xml version tag
