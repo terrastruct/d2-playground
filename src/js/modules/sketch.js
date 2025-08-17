@@ -28,7 +28,10 @@ function readQueryParams() {
     current = "Sketch";
   }
 
-  document.getElementById("current-renderer").textContent = current;
+  const currentRendererEl = document.getElementById("current-renderer");
+  if (currentRendererEl) {
+    currentRendererEl.textContent = current;
+  }
 }
 
 function hydrateRendererOptions() {

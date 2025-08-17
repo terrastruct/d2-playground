@@ -35,6 +35,10 @@ function updateExportButton() {
   const exportBtn = document.getElementById("export-btn");
   const exportMenu = document.getElementById("export-menu");
 
+  if (!exportBtn || !exportMenu) {
+    return;
+  }
+
   if (Sketch.getASCII()) {
     exportBtn.textContent = "Copy";
     exportMenu.style.display = "none";
