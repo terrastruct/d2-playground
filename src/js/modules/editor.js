@@ -527,6 +527,7 @@ export default {
   displayCompileErrors,
   clearCompileErrors,
   getDiagramSVG,
+  getScript,
   getEditor,
   compile,
 };
