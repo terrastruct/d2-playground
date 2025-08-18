@@ -369,17 +369,22 @@ async function compile() {
         setScript(script);
       }
     } catch (err) {
-      if (err.message && err.message.includes("compile error")) {
+      // Check if this is a parse error (JSON array of error objects)
+      if (err.message && err.message.startsWith("[")) {
         try {
           const errorData = JSON.parse(err.message);
-          displayCompileErrors(errorData);
-          unlockCompileBtn();
-          return;
+          if (Array.isArray(errorData) && errorData.length > 0 && errorData[0].errmsg) {
+            displayCompileErrors(errorData);
+            hideLoader();
+            unlockCompileBtn();
+            return;
+          }
         } catch (parseErr) {
           // fallthrough to generic error handling
         }
       }
       const urlEncoded = encodeURIComponent(window.location.href);
+      hideLoader();
       unlockCompileBtn();
       Alert.show(
         `D2 encountered a compile error: "${err.message}". Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
