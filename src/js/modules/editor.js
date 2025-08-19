@@ -325,6 +325,7 @@ async function compile() {
     hideLoader();
     unlockCompileBtn();
     if (response.status === 500) {
+      const urlEncoded = encodeURIComponent(window.location.href);
       Alert.show(
         `D2 encountered an API error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
@@ -339,6 +340,7 @@ async function compile() {
       return;
     }
     if (!response.ok) {
+      const urlEncoded = encodeURIComponent(window.location.href);
       Alert.show(
         `D2 encountered an unexpected error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
@@ -403,6 +405,7 @@ async function compile() {
       svg = await window.d2.render(compiled.diagram, renderOptions);
     } catch (renderErr) {
       console.error("failed to render", renderErr);
+      const urlEncoded = encodeURIComponent(window.location.href);
       Alert.show(
         `D2 encountered an unexpected error. Please help improve D2 by opening an issue on&nbsp;<a href="https://github.com/terrastruct/d2/issues/new?body=${urlEncoded}">Github</a>.`,
         6000
